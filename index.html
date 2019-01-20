@@ -32,7 +32,7 @@
         }
 
         /* Block with logo and description */
-        div.block-container>a {
+        div.block-container>* {
             margin: 0.1em;
             border-radius: 3px;
             padding: 1em;
@@ -45,28 +45,32 @@
             flex-basis: 30em;
         }
 
-        div.block-container>a:nth-child(4n+1) {
+        div.block-container a:visited {
+            color: #333388;
+        }
+
+        div.block-container>*:nth-child(4n+1) {
             background-color: #749D34;
         }
 
-        div.block-container>a:nth-child(4n+2) {
+        div.block-container>*:nth-child(4n+2) {
             background-color: #452F75;
         }
 
-        div.block-container>a:nth-child(4n+3) {
+        div.block-container>*:nth-child(4n+3) {
             background-color: #AA9B38;
         }
 
-        div.block-container>a:nth-child(4n+4) {
+        div.block-container>*:nth-child(4n+4) {
             background-color: #8E2F5C;
         }
 
-        div.block-container>a:hover {
+        div.block-container>*:hover {
             filter: brightness(110%);
         }
 
         /* Image (logo) of the block */
-        div.block-container>a img:first-child {
+        div.block-container>*>img:first-child {
             height: 10em;
             float: left;
         }
@@ -77,10 +81,11 @@
 
 <body>
     <div class="block-container">
-        <a href="//delern.org/">
+        <div>
             <!-- TODO(ksheremet): replace with a link to delern.org -->
             <img src="images/delern.png" alt="Delern Logo"></img>
-            <h3>Delern Flashcards is a great app. Give it a try!</h3>
+            <h3>Delern Flashcards is a great app. Give it a try at our <a href="https://delern.org/">website</a></h3>
+
             <p>
                 Pellentesque risus est, sodales id erat nec, elementum porta
                 nisi. Cras suscipit ultricies lacus, id
@@ -92,7 +97,26 @@
                 ullamcorper. Suspendisse ut quam at tellus rhoncus
                 vulputate. Pellentesque nec feugiat justo.
             </p>
-        </a>
+
+            <p>It's also available as a mobile app:</p>
+
+            <table>
+                <tr>
+                    <td>
+                        <a href='https://play.google.com/store/apps/details?id=org.dasfoo.delern&utm_source=github&pcampaignid=MKT-Other-global-all-co-prtnr-py-PartBadge-Mar2515-1'>
+                            <img alt='Get it on Google Play' src='https://play.google.com/intl/en_us/badges/images/generic/en_badge_web_generic.png'
+                                height='64px' />
+                        </a>
+                    </td>
+                    <td>
+                        <a href='https://itunes.apple.com/us/app/delern/id1435734822?mt=8'>
+                            <img alt='Get it on App Store' src='https://linkmaker.itunes.apple.com/assets/shared/badges/en-us/appstore-lrg.svg'
+                                height='43px' />
+                        </a>
+                    </td>
+                </tr>
+            </table>
+        </div>
         <a>
             <h3>CoctailsPro</h3>
             <p>
@@ -115,7 +139,7 @@
                 accumsan.
             </p>
         </a>
-        <a>
+        <a href="http://katarina.sheremet.ch">
             <h3>Блог путешествий</h3>
             <p>
                 Proin massa purus, vestibulum sit amet lorem eu, iaculis
