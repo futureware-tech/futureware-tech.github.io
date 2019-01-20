@@ -1,1 +1,217 @@
-dasfoo.org website
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans&amp;subset=cyrillic"
+        rel="stylesheet">
+
+    <style>
+        html,
+        html>body,
+        html>body>div {
+            height: 100%;
+        }
+
+        body {
+            font-family: 'Open Sans', sans-serif;
+            margin: 0;
+        }
+
+        div.block-container {
+            /* Enable flex layout */
+            display: flex;
+            /* Put items in a row, overflowing onto next row */
+            flex-flow: row wrap;
+            /* Stretch lines to take up the remaining space */
+            align-content: stretch;
+            /* Stretch items to fill the container */
+            align-items: stretch;
+        }
+
+        /* Block with logo and description */
+        div.block-container>a {
+            margin: 0.1em;
+            border-radius: 3px;
+            padding: 1em;
+
+            color: #eeeeee;
+            text-decoration: none;
+
+            flex-grow: 1;
+            flex-shrink: 1;
+            flex-basis: 30em;
+        }
+
+        div.block-container>a:nth-child(4n+1) {
+            background-color: #749D34;
+        }
+
+        div.block-container>a:nth-child(4n+2) {
+            background-color: #452F75;
+        }
+
+        div.block-container>a:nth-child(4n+3) {
+            background-color: #AA9B38;
+        }
+
+        div.block-container>a:nth-child(4n+4) {
+            background-color: #8E2F5C;
+        }
+
+        div.block-container>a:hover {
+            filter: brightness(110%);
+        }
+
+        /* Image (logo) of the block */
+        div.block-container>a img:first-child {
+            height: 10em;
+            float: left;
+        }
+    </style>
+
+    <title>DasFoo</title>
+</head>
+
+<body>
+    <div class="block-container">
+        <a href="//delern.org/">
+            <!-- TODO(ksheremet): replace with a link to delern.org -->
+            <img src="images/delern.png" alt="Delern Logo"></img>
+            <h3>Delern Flashcards is a great app. Give it a try!</h3>
+            <p>
+                Pellentesque risus est, sodales id erat nec, elementum porta
+                nisi. Cras suscipit ultricies lacus, id
+                euismod ante venenatis at. Etiam mattis risus viverra pulvinar
+                tincidunt. Nullam finibus nisl ac
+                gravida varius. Vestibulum in arcu ut arcu sagittis iaculis.
+                Interdum et malesuada fames ac ante ipsum
+                primis in faucibus. Donec bibendum nunc nec finibus
+                ullamcorper. Suspendisse ut quam at tellus rhoncus
+                vulputate. Pellentesque nec feugiat justo.
+            </p>
+        </a>
+        <a>
+            <h3>CoctailsPro</h3>
+            <p>
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec
+                sed neque viverra, auctor justo vel,
+                vestibulum justo. Phasellus eget nibh efficitur, consequat
+                felis eu, lobortis diam. Etiam ut aliquet
+                felis,
+                vitae finibus risus. Suspendisse luctus, mauris vel aliquam
+                lacinia, sem ipsum gravida orci, ac
+                suscipit
+                nisi elit nec magna. Donec vel augue sem. Aliquam ex arcu,
+                sodales ac risus ut, eleifend luctus erat.
+                Praesent vehicula mi purus, in fringilla ipsum porttitor sed.
+                Aenean tincidunt, nulla ut finibus
+                iaculis,
+                sapien erat semper ex, vitae faucibus ex magna eleifend erat.
+                Fusce volutpat nisi vitae nisi
+                consectetur
+                accumsan.
+            </p>
+        </a>
+        <a>
+            <h3>Блог путешествий</h3>
+            <p>
+                Proin massa purus, vestibulum sit amet lorem eu, iaculis
+                sollicitudin diam. Nam dapibus est quis
+                venenatis
+                facilisis. Mauris nec ultrices tortor, in varius dui. Ut ac sem
+                nec dolor vehicula lobortis sed quis
+                tortor. Donec id malesuada nulla. Pellentesque habitant morbi
+                tristique senectus et netus et malesuada
+                fames ac turpis egestas. Ut faucibus vehicula turpis. Nulla a
+                dolor ornare, bibendum dolor non,
+                consequat
+                neque. Vivamus sollicitudin id leo ac ultricies. Pellentesque
+                iaculis et quam sed mattis. Proin ligula
+                diam, eleifend quis orci eu, luctus vestibulum ex. Aliquam erat
+                volutpat. Etiam commodo egestas velit,
+                quis
+                pretium odio euismod vel. Fusce nibh turpis, semper vel
+                malesuada non, condimentum volutpat nisi.
+            </p>
+        </a>
+        <a>
+            <h3>DasFoo blog</h3>
+            <p>
+                Curabitur non ultricies orci. Maecenas aliquam dui nibh, nec
+                gravida urna volutpat quis. Curabitur
+                efficitur lorem erat, sit amet vehicula enim euismod non.
+                Integer vitae leo vestibulum, tincidunt odio
+                non,
+                blandit sapien. In hac habitasse platea dictumst. Donec non
+                purus sit amet mauris tincidunt ultricies
+                nec
+                consequat turpis. Morbi luctus, massa ac scelerisque egestas,
+                enim metus facilisis nunc, vel ultricies
+                ipsum libero eu elit. Proin congue dui at odio cursus, et
+                tincidunt enim iaculis. Etiam porttitor mi
+                tortor, sed dictum est feugiat non. In scelerisque augue
+                molestie ligula tempor, vitae scelerisque
+                risus
+                tincidunt. Ut rhoncus bibendum mauris, eget porttitor risus
+                semper imperdiet. In lacinia arcu nec metus
+                tempus porta. Ut vitae pharetra elit, eu tempus dui. Nam a
+                consectetur sem, vel posuere turpis. Nunc
+                ultricies orci quis tellus suscipit eleifend. Vestibulum id
+                auctor odio.
+            </p>
+        </a>
+        <a>
+            <h3>Advent calendar</h3>
+            <p>
+                Orci varius natoque penatibus et magnis dis parturient montes,
+                nascetur ridiculus mus. Praesent
+                pulvinar at
+                felis in pulvinar. Aliquam lobortis sem ac lectus convallis
+                feugiat eget id nunc. Etiam ut mi sapien.
+                Donec
+                convallis tempor risus ut vehicula. Nam sed metus accumsan,
+                vulputate diam eget, dictum justo. Etiam at
+                tellus arcu. Donec tincidunt libero condimentum, condimentum
+                mauris vel, congue velit. Curabitur
+                condimentum neque sed eros efficitur, et condimentum ligula
+                laoreet. Phasellus molestie vel nisi sit
+                amet
+                commodo. Morbi nec ipsum ac est consequat mattis vel blandit
+                quam. Nullam metus nisi, fermentum rutrum
+                consequat a, ultrices vel ipsum. Quisque tellus ante, elementum
+                vitae gravida at, lacinia a mi. Fusce
+                iaculis neque volutpat orci placerat commodo. Nullam justo
+                augue, rhoncus quis lacus vitae, auctor
+                mattis
+                erat.
+            </p>
+        </a>
+        <a>
+            <h3>Super Duper</h3>
+            <p>
+                Aenean non rhoncus ex. Aliquam in dui tristique ligula pharetra
+                tempor. Fusce vel ipsum enim. Quisque
+                iaculis in libero vitae ullamcorper. Vestibulum bibendum nunc
+                lectus, non semper massa commodo quis.
+                Vivamus sollicitudin a est sed faucibus. Suspendisse egestas
+                nunc lectus, non bibendum dui aliquam ac.
+                Praesent non vulputate mauris. Phasellus feugiat, libero et
+                commodo vulputate, neque eros blandit arcu,
+                hendrerit vulputate lacus ante a erat. Sed rhoncus commodo
+                sodales. Integer dictum sed ex quis tempor.
+                Vestibulum ac metus tortor. Ut ornare eros ut luctus facilisis.
+                Nulla viverra venenatis sapien, ac
+                malesuada lectus ornare vel. Pellentesque vel lorem sit amet
+                arcu varius luctus. Fusce tempor, tellus
+                eget
+                blandit tristique, quam mauris congue elit, sit amet vehicula
+                quam neque id ex.
+            </p>
+        </a>
+    </div>
+</body>
+
+</html>
