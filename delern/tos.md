@@ -1,4 +1,4 @@
-# Terms of Service
+## Delern Flashcards Terms of Service
 
 *Last Updated: October 22, 2019*
 
