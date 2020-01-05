@@ -7,11 +7,10 @@ hosted service operated by DasFoo. Any use of the Service is subject to the
 following Terms and Conditions of Service ("Terms of Service" or "Terms"), as
 well as to [DasFoo Code of
 Conduct](https://github.com/dasfoo/.github/blob/master/CODE_OF_CONDUCT.md) and
-[Delern Privacy Policy](https://www.iubenda.com/privacy-policy/69239405), all
-of which are incorporated by reference into these Terms of Service. Your use of
-the Service will constitute your acceptance of these Terms of Service, [Delern
-Privacy Policy](https://www.iubenda.com/privacy-policy/69239405) and [DasFoo
-Code of
+[Delern Privacy Policy](https://dasfoo.org/delern/privacy), all of which are
+incorporated by reference into these Terms of Service. Your use of the Service
+will constitute your acceptance of these Terms of Service, [Delern Privacy
+Policy](https://dasfoo.org/delern/privacy) and [DasFoo Code of
 Conduct](https://github.com/dasfoo/.github/blob/master/CODE_OF_CONDUCT.md).
 
 1. **Eligibility**. Use of the Service is void where prohibited. The Service is
