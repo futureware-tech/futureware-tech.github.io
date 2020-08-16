@@ -1,6 +1,6 @@
 ## Privacy Policy of Delern Flashcards
 
-*Last Updated: November 2, 2019*
+*Last Updated: August 16, 2020*
 
 *This Application collects some Personal Data from its Users.*
 
