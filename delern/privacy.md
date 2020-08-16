@@ -7,9 +7,9 @@
 ### Owner and Data Controller
 
 ```
-Katarina Sheremet
-Albisstrasse 8
-8134 Adliswil
+FutureWare GmbH
+Gulerstrasse 26
+7320 Sargans
 Switzerland
 ```
 
