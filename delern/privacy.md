@@ -260,6 +260,16 @@ Google's Payment Privacy Notice can be found [here](https://payments.google.com/
 The App uses RevenueCat to manage paid subscriptions.
 For more detail, please see RevenueCat's [privacy policy](https://www.revenuecat.com/privacy).
 
+#### Adverticement
+
+We may also use Google Admob to display advertising to you while using
+the Service. AdMob uses the devices advertising id to serve personalized
+ads based on the users interests (which includes collecting and analyzing
+user data).
+Information how ads can be personalized can be found [here](https://adssettings.google.com/u/0/authenticated)
+
+For more details, please see [Google Privacy and Terms](https://policies.google.com/technologies/partner-sites)
+
 ### The rights of Users
 
 Users may exercise certain rights regarding their Data processed by the Owner.
