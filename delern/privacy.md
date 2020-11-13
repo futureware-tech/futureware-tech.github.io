@@ -251,6 +251,15 @@ policy of the service.
 Place of processing: United States – [Privacy
 Policy](https://policies.google.com/privacy). Privacy Shield participant.
 
+#### Payment Data
+
+The app uses Apple and Google Play as payment providers for paid subscriptions.
+Apple's Privacy Policy can be found [here](https://www.apple.com/legal/privacy/en-ww/).
+Google's Payment Privacy Notice can be found [here](https://payments.google.com/payments/apis-secure/u/0/get_legal_document?ldo=0&ldt=privacynotice&ldl=en-GB)
+
+The App uses RevenueCat to manage paid subscriptions.
+For more detail, please see RevenueCat's [privacy policy](https://www.revenuecat.com/privacy).
+
 ### The rights of Users
 
 Users may exercise certain rights regarding their Data processed by the Owner.
