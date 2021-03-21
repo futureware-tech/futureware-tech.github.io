@@ -1,6 +1,6 @@
 ## Privacy Policy of Delern Flashcards
 
-_Last Updated: November 13, 2020_
+_Last Updated: March 21, 2021_
 
 _This Application collects some Personal Data from its Users._
 
@@ -13,7 +13,7 @@ Gulerstrasse 26
 Switzerland
 ```
 
-Owner contact email: [katarina@sheremet.ch](mailto:katarina@sheremet.ch).
+Owner contact email: [contact@futureware.dev](mailto:contact@futureware.dev).
 
 ### Types of Data collected
 
@@ -255,7 +255,7 @@ Policy](https://policies.google.com/privacy). Privacy Shield participant.
 
 The app uses Apple and Google Play as payment providers for paid subscriptions.
 Apple's Privacy Policy can be found [here](https://www.apple.com/legal/privacy/en-ww/).
-Google's Payment Privacy Notice can be found [here](https://payments.google.com/payments/apis-secure/u/0/get_legal_document?ldo=0&ldt=privacynotice&ldl=en-GB)
+Google's Payment Privacy Notice can be found [here](https://payments.google.com/payments/apis-secure/u/0/get_legal_document?ldo=0&ldt=privacynotice&ldl=en-GB).
 
 The App uses RevenueCat to manage paid subscriptions.
 For more detail, please see RevenueCat's [privacy policy](https://www.revenuecat.com/privacy).
@@ -266,9 +266,9 @@ We may also use Google Admob to display advertising to you while using
 the Service. AdMob uses the devices advertising id to serve personalized
 ads based on the users interests (which includes collecting and analyzing
 user data).
-Information how ads can be personalized can be found [here](https://adssettings.google.com/u/0/authenticated)
+Information how ads can be personalized can be found [here](https://adssettings.google.com/u/0/authenticated).
 
-For more details, please see [Google Privacy and Terms](https://policies.google.com/technologies/partner-sites)
+For more details, please see [Google Privacy and Terms](https://policies.google.com/technologies/partner-sites).
 
 ### The rights of Users
 
