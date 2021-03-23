@@ -1,6 +1,6 @@
 ## Privacy Policy of Delern Flashcards
 
-_Last Updated: March 21, 2021_
+_Last Updated: March 23, 2021_
 
 _This Application collects some Personal Data from its Users._
 
@@ -129,8 +129,8 @@ obligation or upon order of an authority.
 
 Once the retention period expires, Personal Data shall be deleted. Therefore,
 the right to access, the right to erasure, the right to rectification and the
-right to data portability cannot be enforced after expiration of the retention
-period.
+right to data portability cannot be enforced after the expiration of the
+retention period.
 
 ### The purposes of processing
 
@@ -254,21 +254,26 @@ Policy](https://policies.google.com/privacy). Privacy Shield participant.
 #### Payment Data
 
 The app uses Apple and Google Play as payment providers for paid subscriptions.
-Apple's Privacy Policy can be found [here](https://www.apple.com/legal/privacy/en-ww/).
-Google's Payment Privacy Notice can be found [here](https://payments.google.com/payments/apis-secure/u/0/get_legal_document?ldo=0&ldt=privacynotice&ldl=en-GB).
+Apple's Privacy Policy can be found
+[here](https://www.apple.com/legal/privacy/en-ww/).
+Google's Payment Privacy Notice can be found
+[here](https://payments.google.com/payments/apis-secure/u/0/get_legal_document?ldo=0&ldt=privacynotice&ldl=en-GB).
 
 The App uses RevenueCat to manage paid subscriptions.
-For more detail, please see RevenueCat's [privacy policy](https://www.revenuecat.com/privacy).
+For more detail, please see RevenueCat's
+[privacy policy](https://www.revenuecat.com/privacy).
 
-#### Adverticement
+#### Advertisement
 
 We may also use Google Admob to display advertising to you while using
-the Service. AdMob uses the devices advertising id to serve personalized
-ads based on the users interests (which includes collecting and analyzing
+the Service. AdMob uses the device's advertising id to serve personalized
+ads based on the user's interests (which includes collecting and analyzing
 user data).
-Information how ads can be personalized can be found [here](https://adssettings.google.com/u/0/authenticated).
+Information how ads can be personalized can be found
+[here](https://adssettings.google.com/u/0/authenticated).
 
-For more details, please see [Google Privacy and Terms](https://policies.google.com/technologies/partner-sites).
+For more details, please see
+[Google Privacy and Terms](https://policies.google.com/technologies/partner-sites).
 
 ### The rights of Users
 
@@ -294,7 +299,8 @@ In particular, Users have the right to do the following:
   storing it.
 - **Have their Personal Data deleted or otherwise removed**. Users have the
   right, under certain circumstances, to obtain the erasure of their Data from
-  the Owner.
+  the Owner. To remove your data, please reach out to us at
+  [contact@futureware.dev](mailto:contact@futureware.dev).
 - **Receive their Data and have it transferred to another controller**. Users
   have the right to receive their Data in a structured, commonly used and
   machine readable format and, if technically feasible, to have it transmitted
