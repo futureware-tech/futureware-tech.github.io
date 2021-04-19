@@ -1,17 +1,23 @@
 ## Delern Flashcards Terms of Service
 
-*Last Updated: October 22, 2019*
+_Last Updated: April 19, 2021_
 
 The Delern Flashcards website and all its mobile versions ("Service") is a
-hosted service operated by DasFoo. Any use of the Service is subject to the
-following Terms and Conditions of Service ("Terms of Service" or "Terms"), as
-well as to [DasFoo Code of
-Conduct](https://github.com/dasfoo/.github/blob/master/CODE_OF_CONDUCT.md) and
-[Delern Privacy Policy](https://dasfoo.org/delern/privacy), all of which are
-incorporated by reference into these Terms of Service. Your use of the Service
-will constitute your acceptance of these Terms of Service, [Delern Privacy
-Policy](https://dasfoo.org/delern/privacy) and [DasFoo Code of
-Conduct](https://github.com/dasfoo/.github/blob/master/CODE_OF_CONDUCT.md).
+hosted service operated by FutureWare LLC. Any use of the Service is subject to
+the following Terms and Conditions of Service ("Terms of Service" or "Terms"),
+as well as to [FutureWare LLC Code of
+Conduct](https://github.com/futureware-tech/.github/blob/master/CODE_OF_CONDUCT.md)
+and [Delern Privacy Policy](https://static.futureware.dev/delern/privacy), all
+of which are incorporated by reference into these Terms of Service. Your use of
+the Service will constitute your acceptance of these Terms of Service, [Delern
+Privacy Policy](https://static.futureware.dev/delern/privacy) and [FutureWare
+LLC Code of
+Conduct](https://github.com/futureware-tech/.github/blob/master/CODE_OF_CONDUCT.md).
+
+1. **Acknowledgement**. This Terms of Service agreement is between you and
+   FutureWare LLC only, and not Apple, Inc or Google, Inc. FutureWare LLC, not
+   Apple or Google, is solely responsible for the FutureWare Apps published to
+   App Store or Play Store and their content.
 
 1. **Eligibility**. Use of the Service is void where prohibited. The Service is
    intended for users over the age of 13, but is open to all ages. For children
@@ -54,6 +60,7 @@ Conduct](https://github.com/dasfoo/.github/blob/master/CODE_OF_CONDUCT.md).
    accounts of such violators, or seeking other legal remedies. Prohibited
    Content includes, but is not limited to, Content that, in the sole
    discretion of Delern Flashcards:
+
    1. is patently offensive and promotes racism, bigotry, hatred or physical
       harm of any kind against any class or individual;
    1. harasses or advocates harassment of another person;
@@ -94,6 +101,7 @@ Conduct](https://github.com/dasfoo/.github/blob/master/CODE_OF_CONDUCT.md).
    Service, reporting you to appropriate governmental authorities, including
    law enforcement, or seeking other legal remedies. Prohibited activity
    includes, but is not limited to:
+
    1. criminal or tortious activity, including child pornography, fraud,
       trafficking in obscene material, drug dealing, gambling, harassment,
       stalking, spamming, sending of viruses or other harmful files, copyright
@@ -129,6 +137,7 @@ Conduct](https://github.com/dasfoo/.github/blob/master/CODE_OF_CONDUCT.md).
 
 1. **Content Representations and Warranties**. By making Content available, you
    represent and warrant that:
+
    1. the downloading, copying and use of the Content will not infringe the
       proprietary rights, including but not limited to the copyright, patent,
       trademark or trade secret rights, of any third party;
@@ -166,6 +175,11 @@ Conduct](https://github.com/dasfoo/.github/blob/master/CODE_OF_CONDUCT.md).
    submit, post, or otherwise make available to Delern Flashcards or through
    the Service.
 
+1. **Maintenance and Support**. FutureWare LLC, not Apple, provides support for
+   the paying customers, available at
+   [delern@futureware.dev](mailto:delern@futureware.dev),
+   as well as maintenance and support to the extent required by applicable law.
+
 1. **Responsibility of Service Visitors**. Delern Flashcards has not reviewed,
    and cannot review, all Content posted to the Service, and cannot therefore
    be responsible for that material's content, use or effects. By operating the
@@ -186,7 +200,7 @@ Conduct](https://github.com/dasfoo/.github/blob/master/CODE_OF_CONDUCT.md).
    or other material in violation of these Terms or Delern Flashcards’s
    Community Guidelines are encouraged to report such material to Delern
    Flashcards using the reporting functions such as
-   [delern@dasfoo.org](mailto:delern@dasfoo.org) and Social Media pages.
+   [delern@futureware.dev](mailto:delern@futureware.dev) and Social Media pages.
 
 1. **Content Posted on Other Websites**. We have not reviewed, and cannot
    review, all of the Content, including computer software, made available
@@ -214,9 +228,9 @@ Conduct](https://github.com/dasfoo/.github/blob/master/CODE_OF_CONDUCT.md).
    under no obligation to provide a refund of any amounts previously paid to
    Delern Flashcards by that user.
 
-1. **Trademarks**. DasFoo, Delern Flashcards, delern.org, the Delern Flashcards
-   logo, and all other trademarks, service marks, graphics and logos used in
-   connection with Delern Flashcards, or the Service are trademarks or
+1. **Trademarks**. FutureWare LLC, Delern Flashcards, delern.org, the Delern
+   Flashcards logo, and all other trademarks, service marks, graphics and logos
+   used in connection with Delern Flashcards, or the Service are trademarks or
    registered trademarks of Delern Flashcards or Delern Flashcards's licensors.
    Other trademarks, service marks, graphics and logos used in connection with
    the Service may be the trademarks of other third parties. Your use of the
@@ -284,7 +298,15 @@ Conduct](https://github.com/dasfoo/.github/blob/master/CODE_OF_CONDUCT.md).
    conduct and acceptable content, and including all applicable laws regarding
    the transmission of technical data exported from the United States or the
    country in which you reside, and with any other applicable policy or terms
-   and conditions.
+   and conditions. Additionally you represent and warrant that you are not
+   located in a country that is subject to a U.S. Government embargo, and you
+   are not listed on any U.S. Government list of prohibited or restricted
+   parties.
+
+1. **Third Party Beneficiary**. Your mobile OS is a Third Party Beneficiary of
+   these terms, and, upon your acceptance, such third party beneficiary will
+   have the right (and will be deemed to have accepted the right) to enforce
+   this agreement against you.
 
 1. **Indemnification**. You agree to defend, indemnify and hold harmless Delern
    Flashcards, its contractors, and its licensors, and their respective
