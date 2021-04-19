@@ -1,17 +1,18 @@
 ## Delern Flashcards Terms of Service
 
-*Last Updated: October 22, 2019*
+_Last Updated: April 19, 2021_
 
 The Delern Flashcards website and all its mobile versions ("Service") is a
-hosted service operated by DasFoo. Any use of the Service is subject to the
-following Terms and Conditions of Service ("Terms of Service" or "Terms"), as
-well as to [DasFoo Code of
-Conduct](https://github.com/dasfoo/.github/blob/master/CODE_OF_CONDUCT.md) and
-[Delern Privacy Policy](https://dasfoo.org/delern/privacy), all of which are
-incorporated by reference into these Terms of Service. Your use of the Service
-will constitute your acceptance of these Terms of Service, [Delern Privacy
-Policy](https://dasfoo.org/delern/privacy) and [DasFoo Code of
-Conduct](https://github.com/dasfoo/.github/blob/master/CODE_OF_CONDUCT.md).
+hosted service operated by FutureWare LLC. Any use of the Service is subject to
+the following Terms and Conditions of Service ("Terms of Service" or "Terms"),
+as well as to [FutureWare LLC Code of
+Conduct](https://github.com/futureware-tech/.github/blob/master/CODE_OF_CONDUCT.md)
+and [Delern Privacy Policy](https://static.futureware.dev/delern/privacy), all
+of which are incorporated by reference into these Terms of Service. Your use of
+the Service will constitute your acceptance of these Terms of Service, [Delern
+Privacy Policy](https://static.futureware.dev/delern/privacy) and [FutureWare
+LLC Code of
+Conduct](https://github.com/futureware-tech/.github/blob/master/CODE_OF_CONDUCT.md).
 
 1. **Eligibility**. Use of the Service is void where prohibited. The Service is
    intended for users over the age of 13, but is open to all ages. For children
@@ -54,6 +55,7 @@ Conduct](https://github.com/dasfoo/.github/blob/master/CODE_OF_CONDUCT.md).
    accounts of such violators, or seeking other legal remedies. Prohibited
    Content includes, but is not limited to, Content that, in the sole
    discretion of Delern Flashcards:
+
    1. is patently offensive and promotes racism, bigotry, hatred or physical
       harm of any kind against any class or individual;
    1. harasses or advocates harassment of another person;
@@ -94,6 +96,7 @@ Conduct](https://github.com/dasfoo/.github/blob/master/CODE_OF_CONDUCT.md).
    Service, reporting you to appropriate governmental authorities, including
    law enforcement, or seeking other legal remedies. Prohibited activity
    includes, but is not limited to:
+
    1. criminal or tortious activity, including child pornography, fraud,
       trafficking in obscene material, drug dealing, gambling, harassment,
       stalking, spamming, sending of viruses or other harmful files, copyright
@@ -129,6 +132,7 @@ Conduct](https://github.com/dasfoo/.github/blob/master/CODE_OF_CONDUCT.md).
 
 1. **Content Representations and Warranties**. By making Content available, you
    represent and warrant that:
+
    1. the downloading, copying and use of the Content will not infringe the
       proprietary rights, including but not limited to the copyright, patent,
       trademark or trade secret rights, of any third party;
@@ -186,7 +190,7 @@ Conduct](https://github.com/dasfoo/.github/blob/master/CODE_OF_CONDUCT.md).
    or other material in violation of these Terms or Delern Flashcards’s
    Community Guidelines are encouraged to report such material to Delern
    Flashcards using the reporting functions such as
-   [delern@dasfoo.org](mailto:delern@dasfoo.org) and Social Media pages.
+   [delern@futureware.dev](mailto:delern@futureware.dev) and Social Media pages.
 
 1. **Content Posted on Other Websites**. We have not reviewed, and cannot
    review, all of the Content, including computer software, made available
@@ -214,9 +218,9 @@ Conduct](https://github.com/dasfoo/.github/blob/master/CODE_OF_CONDUCT.md).
    under no obligation to provide a refund of any amounts previously paid to
    Delern Flashcards by that user.
 
-1. **Trademarks**. DasFoo, Delern Flashcards, delern.org, the Delern Flashcards
-   logo, and all other trademarks, service marks, graphics and logos used in
-   connection with Delern Flashcards, or the Service are trademarks or
+1. **Trademarks**. FutureWare LLC, Delern Flashcards, delern.org, the Delern
+   Flashcards logo, and all other trademarks, service marks, graphics and logos
+   used in connection with Delern Flashcards, or the Service are trademarks or
    registered trademarks of Delern Flashcards or Delern Flashcards's licensors.
    Other trademarks, service marks, graphics and logos used in connection with
    the Service may be the trademarks of other third parties. Your use of the
