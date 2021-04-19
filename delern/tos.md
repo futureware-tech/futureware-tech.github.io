@@ -14,6 +14,11 @@ Privacy Policy](https://static.futureware.dev/delern/privacy) and [FutureWare
 LLC Code of
 Conduct](https://github.com/futureware-tech/.github/blob/master/CODE_OF_CONDUCT.md).
 
+1. **Acknowledgement**. This Terms of Service agreement is between you and
+   FutureWare LLC only, and not Apple, Inc or Google, Inc. FutureWare LLC, not
+   Apple or Google, is solely responsible for the FutureWare Apps published to
+   App Store or Play Store and their content.
+
 1. **Eligibility**. Use of the Service is void where prohibited. The Service is
    intended for users over the age of 13, but is open to all ages. For children
    age 13 or younger (or other age of consent where required by local law),
@@ -170,6 +175,11 @@ Conduct](https://github.com/futureware-tech/.github/blob/master/CODE_OF_CONDUCT.
    submit, post, or otherwise make available to Delern Flashcards or through
    the Service.
 
+1. **Maintenance and Support**. FutureWare LLC, not Apple, provides support for
+   the paying customers, available at
+   [delern@futureware.dev](mailto:delern@futureware.dev),
+   as well as maintenance and support to the extent required by applicable law.
+
 1. **Responsibility of Service Visitors**. Delern Flashcards has not reviewed,
    and cannot review, all Content posted to the Service, and cannot therefore
    be responsible for that material's content, use or effects. By operating the
@@ -288,7 +298,15 @@ Conduct](https://github.com/futureware-tech/.github/blob/master/CODE_OF_CONDUCT.
    conduct and acceptable content, and including all applicable laws regarding
    the transmission of technical data exported from the United States or the
    country in which you reside, and with any other applicable policy or terms
-   and conditions.
+   and conditions. Additionally you represent and warrant that you are not
+   located in a country that is subject to a U.S. Government embargo, and you
+   are not listed on any U.S. Government list of prohibited or restricted
+   parties.
+
+1. **Third Party Beneficiary**. Your mobile OS is a Third Party Beneficiary of
+   these terms, and, upon your acceptance, such third party beneficiary will
+   have the right (and will be deemed to have accepted the right) to enforce
+   this agreement against you.
 
 1. **Indemnification**. You agree to defend, indemnify and hold harmless Delern
    Flashcards, its contractors, and its licensors, and their respective
