@@ -115,6 +115,17 @@ export const UI_STRINGS = {
       headingBrand: 'Futureware',
       headingSuffix: '?',
       visualCaption: 'Sovereign local AI architecture keeping enterprise data inside your perimeter',
+      architecture: {
+        perimeterLabel: 'Your Infrastructure · 100% Local',
+        complianceBadge: 'FADP / GDPR Ready',
+        sourcesHeading: '1. Internal Data Sources',
+        sources: ['PDFs & Docs', 'Emails & Invoices', 'Databases & ERP'],
+        coreTitle: '2. Local LLM & RAG Engine',
+        coreSubtitle: 'Runs on your hardware · Zero external cloud',
+        outputsHeading: '3. Automated Outcomes',
+        outputs: ['Instant Q&A', 'Automated Workflows', 'Custom AI Agents'],
+        guarantee: 'No model training on your data · Full Swiss data sovereignty',
+      },
       items: [
         {
           title: 'Data Privacy First',
@@ -283,6 +294,17 @@ export const UI_STRINGS = {
       headingBrand: 'Futureware',
       headingSuffix: ' arbeiten?',
       visualCaption: 'Souveräne lokale KI-Architektur – Ihre Unternehmensdaten bleiben in Ihrer Umgebung',
+      architecture: {
+        perimeterLabel: 'Ihre Infrastruktur · 100% Lokal',
+        complianceBadge: 'nDSG / DSGVO-konform',
+        sourcesHeading: '1. Ihre Datenquellen',
+        sources: ['PDFs & Dokumente', 'E-Mails & Rechnungen', 'Datenbanken & ERP'],
+        coreTitle: '2. Lokale KI- & RAG-Engine',
+        coreSubtitle: 'Läuft auf Ihrer Hardware · Keine Cloud-Abhängigkeit',
+        outputsHeading: '3. Konkrete Ergebnisse',
+        outputs: ['Sofortige Antworten', 'Automatisierte Abläufe', 'Individuelle Agenten'],
+        guarantee: 'Kein KI-Training mit Ihren Daten · Volle Datensouveränität',
+      },
       items: [
         {
           title: 'Datenschutz an erster Stelle',

@@ -154,30 +154,113 @@ const accentStyles = {
       </div>
 
       <div class="lg:w-1/2 w-full">
-        <div
-          role="img"
-          aria-label={t.benefits.visualCaption}
-          class="relative w-full aspect-square md:aspect-[4/3] rounded-2xl overflow-hidden border border-gray-800 bg-gray-900 group"
+        <figure
+          aria-labelledby="benefits-arch-caption"
+          class="glow-card relative w-full rounded-2xl overflow-hidden border border-gray-800 bg-gray-900/80 backdrop-blur-sm p-6 sm:p-8"
         >
           <div
             aria-hidden="true"
-            class="absolute inset-0 bg-gradient-brand opacity-10 group-hover:opacity-20 transition-opacity duration-500 z-10"
+            class="pointer-events-none absolute -top-24 -right-24 h-56 w-56 rounded-full bg-brand-500/10 blur-3xl"
           ></div>
-          <div aria-hidden="true" class="absolute inset-0 flex items-center justify-center">
-            <div class="relative w-32 h-32">
-              <div class="orbit-ring-cw absolute inset-0 rounded-full border border-brand-500/30"></div>
-              <div class="orbit-ring-ccw absolute inset-2 rounded-full border border-purple-500/30"></div>
-              <div class="absolute inset-0 flex items-center justify-center text-brand-400">
-                <svg class="w-10 h-10" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
-                  <rect x="4" y="5" width="16" height="5" rx="1.5" />
-                  <rect x="4" y="14" width="16" height="5" rx="1.5" />
-                  <circle cx="8" cy="7.5" r="0.8" fill="currentColor" />
-                  <circle cx="8" cy="16.5" r="0.8" fill="currentColor" />
-                </svg>
+
+          <div class="relative z-10 flex flex-wrap items-center justify-between gap-2 pb-5 mb-6 border-b border-gray-800">
+            <span class="inline-flex items-center gap-2 text-xs font-mono font-medium uppercase tracking-wider text-teal-300">
+              <span aria-hidden="true" class="h-2 w-2 rounded-full bg-teal-400"></span>
+              {t.benefits.architecture.perimeterLabel}
+            </span>
+            <span class="rounded-full border border-brand-500/30 bg-brand-950/70 px-3 py-1 text-xs font-medium text-brand-100">
+              {t.benefits.architecture.complianceBadge}
+            </span>
+          </div>
+
+          <div class="relative z-10 space-y-4">
+            <div class="rounded-xl border border-gray-800 bg-gray-950/70 p-4">
+              <p class="text-xs font-semibold uppercase tracking-wider text-gray-400 mb-3">
+                {t.benefits.architecture.sourcesHeading}
+              </p>
+              <ul role="list" class="flex flex-wrap gap-2">
+                {
+                  t.benefits.architecture.sources.map((src) => (
+                    <li class="rounded-lg border border-gray-800 bg-gray-900 px-3 py-1.5 text-xs sm:text-sm font-medium text-gray-200">
+                      {src}
+                    </li>
+                  ))
+                }
+              </ul>
+            </div>
+
+            <div aria-hidden="true" class="flex justify-center">
+              <div class="flex h-6 w-6 items-center justify-center rounded-full border border-brand-500/30 bg-gray-950 text-brand-400 text-xs">
+                &darr;
               </div>
             </div>
+
+            <div class="rounded-xl border border-brand-500/40 bg-gray-950/95 p-4 sm:p-5 shadow-lg shadow-brand-500/5">
+              <div class="flex items-center gap-4">
+                <div class="shrink-0">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    viewBox="0 0 200 120"
+                    aria-hidden="true"
+                    class="h-10 w-16"
+                  >
+                    <defs>
+                      <linearGradient id="arch-hex-grad" x1="0%" y1="0%" x2="100%" y2="100%">
+                        <stop offset="0%" stop-color="#3730a3" />
+                        <stop offset="50%" stop-color="#0284c7" />
+                        <stop offset="100%" stop-color="#2dd4bf" />
+                      </linearGradient>
+                    </defs>
+                    <polygon points="100,5 185,30 185,90 100,115 15,90 15,30" fill="none" stroke="url(#arch-hex-grad)" stroke-width="3" />
+                    <path d="M 100 15 L 60 25 L 30 45 L 30 75 L 55 100 L 85 105 L 100 90 L 115 105 L 145 100 L 170 75 L 170 45 L 140 25 Z M 100 15 L 100 45 M 60 25 L 65 55 L 30 45 M 140 25 L 135 55 L 170 45 M 65 55 L 100 45 L 135 55 M 65 55 L 75 80 L 30 75 M 135 55 L 125 80 L 170 75 M 55 100 L 75 80 L 85 105 M 145 100 L 125 80 L 115 105 M 75 80 L 100 90 L 125 80 M 100 45 L 100 90" fill="none" stroke="#cffafe" stroke-width="1.6" opacity="0.9" />
+                    <circle cx="100" cy="45" r="5" fill="#38bdf8" />
+                    <circle cx="100" cy="90" r="4.5" fill="#38bdf8" />
+                  </svg>
+                </div>
+                <div class="min-w-0">
+                  <p class="text-sm sm:text-base font-bold text-white">
+                    {t.benefits.architecture.coreTitle}
+                  </p>
+                  <p class="text-xs sm:text-sm text-brand-400 mt-0.5">
+                    {t.benefits.architecture.coreSubtitle}
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            <div aria-hidden="true" class="flex justify-center">
+              <div class="flex h-6 w-6 items-center justify-center rounded-full border border-teal-500/30 bg-gray-950 text-teal-400 text-xs">
+                &darr;
+              </div>
+            </div>
+
+            <div class="rounded-xl border border-gray-800 bg-gray-950/70 p-4">
+              <p class="text-xs font-semibold uppercase tracking-wider text-gray-400 mb-3">
+                {t.benefits.architecture.outputsHeading}
+              </p>
+              <ul role="list" class="flex flex-wrap gap-2">
+                {
+                  t.benefits.architecture.outputs.map((out) => (
+                    <li class="rounded-lg border border-teal-500/25 bg-teal-950/40 px-3 py-1.5 text-xs sm:text-sm font-medium text-teal-200">
+                      {out}
+                    </li>
+                  ))
+                }
+              </ul>
+            </div>
           </div>
-        </div>
+
+          <figcaption
+            id="benefits-arch-caption"
+            class="relative z-10 mt-6 pt-4 border-t border-gray-800 flex items-center gap-2 text-xs text-gray-400"
+          >
+            <svg aria-hidden="true" class="h-4 w-4 shrink-0 text-teal-400" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M12 3l7 4v5c0 5-3.5 8.5-7 9-3.5-.5-7-4-7-9V7l7-4z" />
+              <path stroke-linecap="round" stroke-linejoin="round" d="M9.5 12l2 2 3.5-4" />
+            </svg>
+            <span>{t.benefits.architecture.guarantee}</span>
+          </figcaption>
+        </figure>
       </div>
     </div>
   </div>

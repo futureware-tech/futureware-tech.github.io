@@ -105,30 +105,6 @@
   }
 }
 
-/* Orbital rings opt in to continuous spin only under no-preference */
-@keyframes orbit-spin {
-  to {
-    transform: rotate(360deg);
-  }
-}
-
-.orbit-ring-cw {
-  @media (prefers-reduced-motion: no-preference) {
-    animation: orbit-spin 4s linear infinite;
-  }
-}
-
-.orbit-ring-ccw {
-  @media (prefers-reduced-motion: no-preference) {
-    animation: orbit-spin 5s linear infinite reverse;
-  }
-}
-
-.motion-paused .orbit-ring-cw,
-.motion-paused .orbit-ring-ccw {
-  animation-play-state: paused;
-}
-
 /* Responsive site navigation: single semantic <nav> with Popover narrow mode & measured inline wide mode */
 .site-header .header-inner > * {
   flex-shrink: 0;

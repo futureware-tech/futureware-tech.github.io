@@ -65,7 +65,7 @@ The landing page (`/` and `/de/`) MUST present FutureWare's Local AI & Automatio
   2. *RAG Systems (Chat with your Data)* / *RAG-Systeme (Ihre Daten durchsuchen)*
   3. *Routine Task Automation* / *Prozessautomatisierung*
   4. *Custom AI Agents* / *Individuelle KI-Agenten*
-- **Value Proposition (`#benefits`)**: MUST display the *"Why Partner with Futureware?"* / *"Warum mit Futureware arbeiten?"* section with all three localized pillars (*Data Privacy First*, *Tailored to Your Needs*, *Simple Language, Clear Results*) alongside the counter-rotating orbital data-sovereignty graphic.
+- **Value Proposition (`#benefits`)**: MUST display the *"Why Partner with Futureware?"* / *"Warum mit Futureware arbeiten?"* section with all three localized pillars (*Data Privacy First*, *Tailored to Your Needs*, *Simple Language, Clear Results*) alongside a localized **Local AI Architecture** visual card showing internal data sources, on-premise LLM & RAG processing, automated outcomes, and a zero-external-cloud data-sovereignty guarantee.
 
 #### Scenario: Prospective client books a consultation from the Hero
 
