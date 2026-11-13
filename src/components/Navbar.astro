@@ -1,0 +1,256 @@
+---
+// Governing: ADR-0001 (Astro + Tailwind CSS), ADR-0002 (EN/DE subpath routing), ADR-0003 (External Google Calendar booking)
+// Implements: SPEC-0001 REQ "Bilingual Navigation and Localized SEO Routing", SPEC-0002 REQ "Conditional Navigation and Graceful Empty States", SPEC-0002 REQ "Cross-Locale Entry Linking"
+
+import BrandLogo from './BrandLogo.astro';
+import { SITE_CONFIG } from '../config/site';
+import { getTranslations, localePath, type Locale } from '../i18n/ui';
+
+interface Props {
+  lang: Locale;
+  currentPath: string;
+  enHref: string;
+  deHref: string;
+  showProjects: boolean;
+  showBlog: boolean;
+}
+
+const { lang, currentPath, enHref, deHref, showProjects, showBlog } = Astro.props;
+const t = getTranslations(lang);
+const homeHref = localePath(lang, '/');
+const projectsHref = localePath(lang, '/projects');
+const blogHref = localePath(lang, '/blog');
+
+const isHome = currentPath === '/' || currentPath === '/de' || currentPath === '/de/';
+const isProjects = currentPath.startsWith('/projects') || currentPath.startsWith('/de/projects');
+const isBlog = currentPath.startsWith('/blog') || currentPath.startsWith('/de/blog');
+
+const sectionBase = isHome ? '' : homeHref.replace(/\/$/, '');
+---
+
+<header class="site-header sticky top-0 z-50 w-full backdrop-blur-md bg-dark/80 border-b border-gray-800">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="header-inner flex justify-between items-center gap-4 min-h-20 py-3">
+      <a
+        href={homeHref}
+        aria-current={isHome ? 'page' : undefined}
+        class="inline-flex items-center shrink-0 rounded-lg py-1 transition-opacity hover:opacity-90"
+      >
+        <BrandLogo idPrefix="fw-nav" class="h-10 sm:h-11 w-auto" />
+        <span class="visually-hidden">FutureWare</span>
+      </a>
+
+      <div class="flex items-center gap-3">
+        <nav class="site-nav flex items-center" aria-label={t.a11y.primaryNav}>
+          <button
+            class="menu-button inline-flex items-center gap-2 px-3.5 py-2 rounded-full bg-gray-900 border border-gray-700 text-gray-200 hover:text-white hover:border-gray-500 text-sm font-medium transition-colors"
+            type="button"
+            popovertarget="site-menu"
+            popovertargetaction="toggle"
+            aria-controls="site-menu"
+          >
+            <svg aria-hidden="true" class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+            </svg>
+            <span>{t.a11y.menuButton}</span>
+          </button>
+
+          <ul id="site-menu" class="site-menu" popover="auto">
+            <li>
+              <a
+                href={`${sectionBase}#services`}
+                class="site-nav-link block py-2 px-2 text-gray-300 hover:text-white transition-colors text-sm font-medium"
+              >
+                {t.nav.services}
+              </a>
+            </li>
+            <li>
+              <a
+                href={`${sectionBase}#benefits`}
+                class="site-nav-link block py-2 px-2 text-gray-300 hover:text-white transition-colors text-sm font-medium"
+              >
+                {t.nav.benefits}
+              </a>
+            </li>
+            <li>
+              <a
+                href={`${sectionBase}#testimonials`}
+                class="site-nav-link block py-2 px-2 text-gray-300 hover:text-white transition-colors text-sm font-medium"
+              >
+                {t.nav.reviews}
+              </a>
+            </li>
+            {
+              showProjects && (
+                <li>
+                  <a
+                    href={projectsHref}
+                    aria-current={isProjects ? 'page' : undefined}
+                    class="site-nav-link block py-2 px-2 text-gray-300 hover:text-white transition-colors text-sm font-medium"
+                  >
+                    {t.nav.projects}
+                  </a>
+                </li>
+              )
+            }
+            {
+              showBlog && (
+                <li>
+                  <a
+                    href={blogHref}
+                    aria-current={isBlog ? 'page' : undefined}
+                    class="site-nav-link block py-2 px-2 text-gray-300 hover:text-white transition-colors text-sm font-medium"
+                  >
+                    {t.nav.blog}
+                  </a>
+                </li>
+              )
+            }
+            <li>
+              <a
+                href={`${sectionBase}#contact`}
+                class="site-nav-link block py-2 px-2 text-gray-300 hover:text-white transition-colors text-sm font-medium"
+              >
+                {t.nav.contact}
+              </a>
+            </li>
+            <li>
+              <a
+                href={SITE_CONFIG.bookingUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                class="inline-flex items-center justify-center px-4 py-2 rounded-full bg-brand-500/15 border border-brand-500/40 text-brand-400 hover:bg-brand-500 hover:text-white transition-colors text-xs font-semibold"
+              >
+                {t.nav.bookCall}
+                <span class="visually-hidden"> {t.a11y.externalNewTab}</span>
+              </a>
+            </li>
+          </ul>
+        </nav>
+
+        <div
+          role="group"
+          aria-label={t.a11y.languageSwitcher}
+          class="inline-flex items-center gap-1 bg-gray-900 rounded-full p-1 border border-gray-700"
+        >
+          <a
+            href={enHref}
+            hreflang="en"
+            lang="en"
+            aria-label={t.a11y.switchToEnglish}
+            aria-current={lang === 'en' ? 'page' : undefined}
+            class:list={[
+              'inline-flex items-center justify-center min-h-7 px-3 py-1 text-xs font-semibold rounded-full transition-colors',
+              lang === 'en'
+                ? 'bg-brand-500 text-white'
+                : 'text-gray-400 hover:text-white',
+            ]}
+          >
+            EN
+          </a>
+          <a
+            href={deHref}
+            hreflang="de"
+            lang="de"
+            aria-label={t.a11y.switchToGerman}
+            aria-current={lang === 'de' ? 'page' : undefined}
+            class:list={[
+              'inline-flex items-center justify-center min-h-7 px-3 py-1 text-xs font-semibold rounded-full transition-colors',
+              lang === 'de'
+                ? 'bg-brand-500 text-white'
+                : 'text-gray-400 hover:text-white',
+            ]}
+          >
+            DE
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<script>
+  // MANDATORY feature detection for Popover API polyfill per modern-web-guidance `navbar`
+  if (!Object.hasOwn(HTMLElement.prototype, 'popover')) {
+    import('@oddbird/popover-polyfill');
+  }
+
+  function initResponsiveNav() {
+    const header = document.querySelector('.site-header') as HTMLElement | null;
+    const inner = header?.querySelector('.header-inner') as HTMLElement | null;
+    const menu = document.getElementById('site-menu') as HTMLElement | null;
+    if (!header || !inner || !menu) return;
+
+    let lastHeaderWidth = header.clientWidth;
+    let isWideState = false;
+
+    const syncLayout = () => {
+      const currentWidth = header.clientWidth;
+      // While collapsed, only re-measure when the header has grown to prevent resize thrashing
+      if (!isWideState && currentWidth < lastHeaderWidth) {
+        lastHeaderWidth = currentWidth;
+        return;
+      }
+      lastHeaderWidth = currentWidth;
+
+      const wasOpen =
+        menu.hasAttribute('popover') &&
+        (menu.matches(':popover-open') || menu.classList.contains(':popover-open'));
+
+      header.classList.add('is-measuring', 'is-wide');
+      menu.removeAttribute('popover');
+
+      const fitsInline = inner.scrollWidth <= inner.clientWidth;
+      isWideState = fitsInline;
+
+      if (!fitsInline) {
+        header.classList.remove('is-wide');
+        // Use setAttribute/removeAttribute rather than IDL property to avoid polyfill race conditions
+        menu.setAttribute('popover', 'auto');
+        if (wasOpen && typeof menu.showPopover === 'function') {
+          try {
+            menu.showPopover();
+          } catch {
+            // Ignore if not yet ready
+          }
+        }
+      }
+
+      requestAnimationFrame(() => {
+        header.classList.remove('is-measuring');
+      });
+    };
+
+    // Initial measurement
+    header.classList.add('is-measuring', 'is-wide');
+    menu.removeAttribute('popover');
+    isWideState = inner.scrollWidth <= inner.clientWidth;
+    if (!isWideState) {
+      header.classList.remove('is-wide');
+      menu.setAttribute('popover', 'auto');
+    }
+    requestAnimationFrame(() => {
+      header.classList.remove('is-measuring');
+    });
+
+    const ro = new ResizeObserver(() => {
+      syncLayout();
+    });
+    ro.observe(header);
+
+    // Dismiss narrow popover when clicking an in-page anchor link
+    menu.addEventListener('click', (event) => {
+      const link = (event.target as Element | null)?.closest('a');
+      if (!link || isWideState || !menu.hasAttribute('popover')) return;
+      if (typeof menu.hidePopover === 'function') {
+        try {
+          menu.hidePopover();
+        } catch {
+          // Ignore if already closed
+        }
+      }
+    });
+  }
+
+  initResponsiveNav();
+</script>

@@ -1,0 +1,158 @@
+---
+// Governing: ADR-0001 (Astro + Tailwind static site), ADR-0002 (bilingual EN/DE routing)
+// Implements: SPEC-0001 REQ "Legal & Imprint Pages", REQ "SEO, Metadata & Hreflang"
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import { SITE_CONFIG } from '@/config/site';
+import { getTranslations, localePath, type Locale } from '@/i18n/ui';
+
+interface Props {
+  lang: Locale;
+}
+
+const { lang } = Astro.props;
+const t = getTranslations(lang);
+const isDe = lang === 'de';
+const { company } = SITE_CONFIG;
+---
+
+<BaseLayout
+  lang={lang}
+  title={t.meta.imprintTitle}
+  description={t.meta.imprintDescription}
+  canonicalPath={localePath(lang, '/imprint')}
+  alternateEnPath={localePath('en', '/imprint')}
+  alternateDePath={localePath('de', '/imprint')}
+>
+  <article class="relative py-20 md:py-28">
+    <div class="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
+      <div class="mb-8">
+        <a
+          href={localePath(lang, '/')}
+          class="inline-flex items-center gap-2 text-sm font-medium text-teal-400 transition-colors hover:text-teal-300"
+        >
+          <span aria-hidden="true">&larr;</span>
+          {t.collections.backToHome}
+        </a>
+      </div>
+
+      <header class="mb-12 border-b border-slate-800 pb-8">
+        <p class="mb-2 font-mono text-xs uppercase tracking-widest text-teal-400">
+          {isDe ? 'Rechtliche Angaben' : 'Legal Disclosure'}
+        </p>
+        <h1
+          id="main-heading"
+          tabindex="-1"
+          class="text-3xl font-extrabold tracking-tight text-white focus:outline-none sm:text-4xl"
+        >
+          {isDe ? 'Impressum' : 'Imprint'}
+        </h1>
+      </header>
+
+      <div class="space-y-10 text-slate-300 leading-relaxed">
+        <section class="rounded-2xl border border-slate-800 bg-slate-900/60 p-6 sm:p-8">
+          <h2 class="mb-4 text-xl font-bold text-white">
+            {isDe ? 'Verantwortliches Unternehmen' : 'Responsible Entity'}
+          </h2>
+          <address class="not-italic space-y-1 text-slate-300">
+            <p class="font-semibold text-white">
+              {company.legalName}
+              {!isDe && (
+                <span class="font-normal text-slate-400"> ({company.englishLegalAlias})</span>
+              )}
+            </p>
+            <p>{company.street}</p>
+            <p>
+              {company.postalCode} {company.city}
+            </p>
+            <p>{isDe ? company.countryDe : company.countryEn}</p>
+          </address>
+
+          <dl class="mt-6 grid gap-4 border-t border-slate-800 pt-6 sm:grid-cols-2">
+            <div>
+              <dt class="text-xs font-semibold uppercase tracking-wider text-slate-400">
+                {isDe ? 'E-Mail' : 'Email'}
+              </dt>
+              <dd class="mt-1">
+                <a
+                  href={`mailto:${company.email}`}
+                  class="text-teal-400 underline decoration-teal-500/40 underline-offset-4 hover:text-teal-300"
+                >
+                  {company.email}
+                </a>
+              </dd>
+            </div>
+            <div>
+              <dt class="text-xs font-semibold uppercase tracking-wider text-slate-400">
+                {isDe ? 'Website' : 'Website'}
+              </dt>
+              <dd class="mt-1">
+                <a
+                  href={SITE_CONFIG.siteUrl}
+                  class="text-teal-400 underline decoration-teal-500/40 underline-offset-4 hover:text-teal-300"
+                >
+                  {SITE_CONFIG.siteUrl}
+                </a>
+              </dd>
+            </div>
+            <div>
+              <dt class="text-xs font-semibold uppercase tracking-wider text-slate-400">
+                {isDe ? 'Rechtsform' : 'Legal Form'}
+              </dt>
+              <dd class="mt-1 text-slate-200">
+                {isDe
+                  ? 'Gesellschaft mit beschränkter Haftung (GmbH), Schweiz'
+                  : 'Limited Liability Company (GmbH / LLC), Switzerland'}
+              </dd>
+            </div>
+            <div>
+              <dt class="text-xs font-semibold uppercase tracking-wider text-slate-400">
+                {isDe ? 'Datenschutz' : 'Privacy Policy'}
+              </dt>
+              <dd class="mt-1">
+                <a
+                  href={localePath(lang, '/privacy')}
+                  class="text-teal-400 underline decoration-teal-500/40 underline-offset-4 hover:text-teal-300"
+                >
+                  {t.footer.privacy}
+                </a>
+              </dd>
+            </div>
+          </dl>
+        </section>
+
+        <section class="space-y-3">
+          <h2 class="text-xl font-bold text-white">
+            {isDe ? 'Haftungsausschluss' : 'Disclaimer'}
+          </h2>
+          <p>
+            {isDe
+              ? 'Die Inhalte dieser Website werden mit grösstmöglicher Sorgfalt erstellt. FutureWare GmbH übernimmt jedoch keine Gewähr für die Richtigkeit, Vollständigkeit und Aktualität der bereitgestellten Informationen. Haftungsansprüche gegen FutureWare GmbH wegen Schäden materieller oder immaterieller Art, die aus dem Zugriff oder der Nutzung bzw. Nichtnutzung der veröffentlichten Informationen entstanden sind, werden im gesetzlich zulässigen Rahmen ausgeschlossen.'
+              : 'The contents of this website are prepared with the utmost care. However, FutureWare GmbH assumes no liability for the accuracy, completeness, or timeliness of the information provided. Liability claims against FutureWare GmbH for material or immaterial damage resulting from access to, use of, or non-use of the published information are excluded to the extent permitted by applicable law.'}
+          </p>
+        </section>
+
+        <section class="space-y-3">
+          <h2 class="text-xl font-bold text-white">
+            {isDe ? 'Haftung für externe Links' : 'External Links Notice'}
+          </h2>
+          <p>
+            {isDe
+              ? 'Verweise und Verknüpfungen auf Websites Dritter (z. B. Google Calendar zur Terminbuchung oder Kundenreferenzen) liegen ausserhalb unseres Verantwortungsbereichs. Der Zugriff und die Nutzung solcher Websites erfolgen auf eigene Gefahr der jeweiligen Nutzerinnen und Nutzer.'
+              : 'References and links to third-party websites (such as Google Calendar for appointment booking or client reference websites) lie outside our area of responsibility. Access to and use of such external websites occur at the user’s own risk.'}
+          </p>
+        </section>
+
+        <section class="space-y-3">
+          <h2 class="text-xl font-bold text-white">
+            {isDe ? 'Urheberrecht' : 'Copyright & Intellectual Property'}
+          </h2>
+          <p>
+            {isDe
+              ? 'Die Urheber- und alle anderen Rechte an Inhalten, Texten, Designs, Codebeispielen oder Grafiken auf dieser Website gehören ausschliesslich der FutureWare GmbH oder den speziell genannten Rechteinhabern. Für die Reproduktion jeglicher Elemente ist die vorherige schriftliche Zustimmung erforderlich.'
+              : 'Copyright and all other intellectual property rights in the content, text, design, code examples, and graphics on this website belong exclusively to FutureWare GmbH or the specifically named rights holders. Any reproduction or redistribution requires prior written consent.'}
+          </p>
+        </section>
+      </div>
+    </div>
+  </article>
+</BaseLayout>

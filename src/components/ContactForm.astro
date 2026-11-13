@@ -1,0 +1,346 @@
+---
+// Governing: ADR-0003 (Serverless Web3Forms/Formspree contact form and Google Calendar booking)
+// Implements: SPEC-0001 REQ "Serverless Contact Form and Consultation Alternatives"
+
+import { SITE_CONFIG } from '../config/site';
+import { getTranslations, type Locale } from '../i18n/ui';
+
+interface Props {
+  lang: Locale;
+}
+
+const { lang } = Astro.props;
+const t = getTranslations(lang);
+---
+
+<div class="space-y-8">
+  <div class="inline-flex flex-col sm:flex-row items-center justify-center gap-3 px-5 py-3.5 rounded-2xl bg-gray-950/80 border border-gray-800 text-sm text-gray-300">
+    <span>{t.contact.preferCallText}</span>
+    <a
+      href={SITE_CONFIG.bookingUrl}
+      target="_blank"
+      rel="noopener noreferrer"
+      class="inline-flex items-center gap-1.5 font-semibold text-brand-400 hover:text-brand-100 transition-colors underline underline-offset-4"
+    >
+      {t.contact.bookCallButton}
+      <span aria-hidden="true">&rarr;</span>
+      <span class="visually-hidden"> {t.a11y.externalNewTab}</span>
+    </a>
+  </div>
+
+  <form
+    id="contact-form"
+    method="POST"
+    action={SITE_CONFIG.contactForm.formspreeEndpoint || SITE_CONFIG.contactForm.web3FormsEndpoint}
+    novalidate
+    data-web3forms-endpoint={SITE_CONFIG.contactForm.web3FormsEndpoint}
+    data-web3forms-key={SITE_CONFIG.contactForm.web3FormsAccessKey}
+    data-formspree-endpoint={SITE_CONFIG.contactForm.formspreeEndpoint}
+    data-fallback-email={SITE_CONFIG.company.email}
+    data-booking-url={SITE_CONFIG.bookingUrl}
+    data-label-submit={t.contact.submitButton}
+    data-label-submitting={t.contact.submittingButton}
+    data-msg-success={t.contact.successMessage}
+    data-msg-error-prefix={t.contact.errorMessagePrefix}
+    data-msg-unconfigured-prefix={t.contact.unconfiguredPrefix}
+    data-msg-or-book={t.contact.orBookText}
+    class="space-y-5 text-start max-w-lg mx-auto"
+  >
+    <div class="visually-hidden" aria-hidden="true">
+      <label for="contact-botcheck">{t.contact.honeypotLabel}</label>
+      <input
+        type="checkbox"
+        id="contact-botcheck"
+        name="botcheck"
+        tabindex="-1"
+        autocomplete="off"
+      />
+    </div>
+
+    <div>
+      <label for="contact-name" class="block text-sm font-medium text-gray-300 mb-1.5">
+        {t.contact.nameLabel} <span aria-hidden="true" class="text-brand-400">*</span>
+      </label>
+      <input
+        type="text"
+        id="contact-name"
+        name="name"
+        required
+        minlength="2"
+        maxlength="120"
+        autocomplete="name"
+        enterkeyhint="next"
+        aria-invalid="false"
+        placeholder={t.contact.namePlaceholder}
+        data-error="contact-name-error"
+        class="form-control w-full bg-gray-950 border border-gray-700 rounded-lg px-4 py-3 text-white placeholder:text-gray-500 transition-colors"
+      />
+      <div id="contact-name-error" class="field-error-msg">
+        <span role="img" aria-label={t.a11y.errorIconLabel}>!</span>
+        <span>{t.contact.nameError}</span>
+      </div>
+    </div>
+
+    <div>
+      <label for="contact-email" class="block text-sm font-medium text-gray-300 mb-1">
+        {t.contact.emailLabel} <span aria-hidden="true" class="text-brand-400">*</span>
+      </label>
+      <span id="contact-email-hint" class="block text-xs text-gray-400 mb-1.5">
+        {t.contact.emailHint}
+      </span>
+      <input
+        type="email"
+        id="contact-email"
+        name="email"
+        required
+        maxlength="254"
+        autocomplete="email"
+        inputmode="email"
+        autocorrect="off"
+        autocapitalize="none"
+        spellcheck="false"
+        enterkeyhint="next"
+        aria-invalid="false"
+        placeholder={t.contact.emailPlaceholder}
+        aria-describedby="contact-email-hint"
+        data-error="contact-email-error"
+        class="form-control w-full bg-gray-950 border border-gray-700 rounded-lg px-4 py-3 text-white placeholder:text-gray-500 transition-colors"
+      />
+      <div id="contact-email-error" class="field-error-msg">
+        <span role="img" aria-label={t.a11y.errorIconLabel}>!</span>
+        <span>{t.contact.emailError}</span>
+      </div>
+    </div>
+
+    <div>
+      <label for="contact-message" class="block text-sm font-medium text-gray-300 mb-1.5">
+        {t.contact.messageLabel} <span aria-hidden="true" class="text-brand-400">*</span>
+      </label>
+      <textarea
+        id="contact-message"
+        name="message"
+        rows="4"
+        required
+        minlength="10"
+        maxlength="4000"
+        aria-invalid="false"
+        placeholder={t.contact.messagePlaceholder}
+        data-error="contact-message-error"
+        class="form-control w-full bg-gray-950 border border-gray-700 rounded-lg px-4 py-3 text-white placeholder:text-gray-500 transition-colors resize-y"
+      ></textarea>
+      <div id="contact-message-error" class="field-error-msg">
+        <span role="img" aria-label={t.a11y.errorIconLabel}>!</span>
+        <span>{t.contact.messageError}</span>
+      </div>
+    </div>
+
+    <button
+      type="submit"
+      id="contact-submit-btn"
+      class="w-full min-h-12 px-6 py-3 rounded-lg bg-gradient-brand text-white font-medium hover:shadow-lg hover:shadow-brand-500/30 transition-shadow cursor-pointer disabled:opacity-60 disabled:cursor-not-allowed mt-2"
+    >
+      {t.contact.submitButton}
+    </button>
+
+    <div id="contact-form-status" role="status" aria-live="polite" class="text-sm rounded-xl"></div>
+    <div id="contact-field-live" aria-live="polite" class="visually-hidden"></div>
+  </form>
+</div>
+
+<script>
+  const form = document.getElementById('contact-form') as HTMLFormElement | null;
+  if (form) {
+    const submitBtn = document.getElementById('contact-submit-btn') as HTMLButtonElement | null;
+    const statusBox = document.getElementById('contact-form-status') as HTMLElement | null;
+    const fieldLive = document.getElementById('contact-field-live') as HTMLElement | null;
+    const editedFields = new WeakSet<Element>();
+    let liveTimer: ReturnType<typeof setTimeout> | undefined;
+
+    const updateErrorDescription = (control: HTMLInputElement | HTMLTextAreaElement, invalid: boolean) => {
+      const errId = control.dataset.error;
+      if (!errId) return;
+      const existing = (control.getAttribute('aria-describedby') || '')
+        .split(/\s+/)
+        .filter((token) => token && token !== errId);
+      if (invalid) existing.push(errId);
+      if (existing.length > 0) {
+        control.setAttribute('aria-describedby', existing.join(' '));
+      } else {
+        control.removeAttribute('aria-describedby');
+      }
+    };
+
+    const refreshControlValidity = (
+      control: HTMLInputElement | HTMLTextAreaElement,
+      speakOnInvalid = false,
+    ) => {
+      if (control.type === 'checkbox') return;
+      const isInvalid = !control.validity.valid && editedFields.has(control);
+      control.classList.toggle('user-invalid-fallback', isInvalid);
+      control.setAttribute('aria-invalid', isInvalid ? 'true' : 'false');
+      updateErrorDescription(control, isInvalid);
+
+      if (isInvalid && speakOnInvalid && fieldLive && control.dataset.error) {
+        const errNode = document.getElementById(control.dataset.error);
+        const msg = errNode?.textContent?.replace(/\s+/g, ' ').trim() || '';
+        clearTimeout(liveTimer);
+        fieldLive.textContent = '';
+        liveTimer = setTimeout(() => {
+          fieldLive.textContent = msg;
+        }, 450);
+      }
+    };
+
+    form.addEventListener('input', (evt) => {
+      const target = evt.target;
+      if (target instanceof HTMLInputElement || target instanceof HTMLTextAreaElement) {
+        editedFields.add(target);
+        if (target.getAttribute('aria-invalid') === 'true') {
+          refreshControlValidity(target, false);
+        }
+      }
+    });
+
+    form.addEventListener(
+      'blur',
+      (evt) => {
+        const target = evt.target;
+        if (target instanceof HTMLInputElement || target instanceof HTMLTextAreaElement) {
+          if (editedFields.has(target)) {
+            refreshControlValidity(target, true);
+          }
+        }
+      },
+      true,
+    );
+
+    form.addEventListener(
+      'invalid',
+      (evt) => {
+        const target = evt.target;
+        if (target instanceof HTMLInputElement || target instanceof HTMLTextAreaElement) {
+          editedFields.add(target);
+          refreshControlValidity(target, false);
+        }
+      },
+      true,
+    );
+
+    const showFallbackBanner = (introText: string) => {
+      if (!statusBox) return;
+      const email = form.dataset.fallbackEmail || 'contact@futureware.ch';
+      const bookingUrl = form.dataset.bookingUrl || 'https://calendar.app.google/5Ciymv2rX73e5fwy8';
+      const orBook = form.dataset.msgOrBook || 'or schedule a call';
+
+      statusBox.className =
+        'text-sm rounded-xl p-4 border border-amber-500/40 bg-amber-950/40 text-amber-100 mt-4';
+      statusBox.replaceChildren();
+
+      const paragraph = document.createElement('p');
+      paragraph.append(`${introText} `);
+
+      const emailAnchor = document.createElement('a');
+      emailAnchor.href = `mailto:${email}`;
+      emailAnchor.textContent = email;
+      emailAnchor.className = 'font-semibold underline text-brand-400 hover:text-white';
+      paragraph.append(emailAnchor, ` ${orBook}: `);
+
+      const calendarAnchor = document.createElement('a');
+      calendarAnchor.href = bookingUrl;
+      calendarAnchor.target = '_blank';
+      calendarAnchor.rel = 'noopener noreferrer';
+      calendarAnchor.textContent = 'Google Calendar';
+      calendarAnchor.className = 'font-semibold underline text-brand-400 hover:text-white';
+      paragraph.append(calendarAnchor, '.');
+
+      statusBox.append(paragraph);
+    };
+
+    form.addEventListener('submit', async (evt) => {
+      evt.preventDefault();
+
+      if (!form.checkValidity()) {
+        const firstInvalid = form.querySelector(':invalid') as HTMLElement | null;
+        firstInvalid?.focus();
+        return;
+      }
+
+      const data = new FormData(form);
+      if (data.get('botcheck')) {
+        form.reset();
+        return;
+      }
+
+      const name = String(data.get('name') || '').trim();
+      const email = String(data.get('email') || '').trim();
+      const message = String(data.get('message') || '').trim();
+
+      const formspreeUrl = (form.dataset.formspreeEndpoint || '').trim();
+      const web3Key = (form.dataset.web3FormsKey || '').trim();
+      const web3Url = (form.dataset.web3formsEndpoint || 'https://api.web3forms.com/submit').trim();
+
+      if (!formspreeUrl && !web3Key) {
+        const inbox = form.dataset.fallbackEmail || 'contact@futureware.ch';
+        const subject = encodeURIComponent(`Futureware Inquiry — ${name}`);
+        const body = encodeURIComponent(`Name: ${name}\nEmail: ${email}\n\n${message}`);
+        window.location.href = `mailto:${inbox}?subject=${subject}&body=${body}`;
+        showFallbackBanner(form.dataset.msgUnconfiguredPrefix || 'Reach us directly at');
+        return;
+      }
+
+      if (submitBtn) {
+        submitBtn.disabled = true;
+        submitBtn.textContent = form.dataset.labelSubmitting || 'Sending…';
+      }
+
+      try {
+        const targetUrl = formspreeUrl || web3Url;
+        const bodyPayload = formspreeUrl
+          ? { name, email, message }
+          : {
+              access_key: web3Key,
+              subject: `Inquiry via futureware.ch — ${name}`,
+              from_name: name,
+              name,
+              email,
+              message,
+              botcheck: false,
+            };
+
+        const res = await fetch(targetUrl, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            Accept: 'application/json',
+          },
+          body: JSON.stringify(bodyPayload),
+        });
+
+        const json = await res.json().catch(() => null);
+        if (!res.ok || (!formspreeUrl && json?.success === false)) {
+          throw new Error('Form endpoint returned non-success');
+        }
+
+        if (statusBox) {
+          statusBox.className =
+            'text-sm rounded-xl p-4 border border-emerald-500/40 bg-emerald-950/40 text-emerald-200 mt-4';
+          statusBox.textContent = form.dataset.msgSuccess || 'Message sent!';
+        }
+        form.reset();
+        form.querySelectorAll('input, textarea').forEach((node) => {
+          if (node instanceof HTMLInputElement || node instanceof HTMLTextAreaElement) {
+            editedFields.delete(node);
+            refreshControlValidity(node, false);
+          }
+        });
+      } catch {
+        showFallbackBanner(form.dataset.msgErrorPrefix || 'Please email us directly at');
+      } finally {
+        if (submitBtn) {
+          submitBtn.disabled = false;
+          submitBtn.textContent = form.dataset.labelSubmit || 'Send Message';
+        }
+      }
+    });
+  }
+</script>

@@ -1,0 +1,137 @@
+---
+// Governing: ADR-0001 (Astro Content Collections), ADR-0002 (bilingual EN/DE routing)
+// Implements: SPEC-0002 REQ "Localized Collection Listing and Detail Routes", REQ "Conditional Navigation and Graceful Empty States"
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import { SITE_CONFIG } from '@/config/site';
+import { getTranslations, localePath, type Locale } from '@/i18n/ui';
+import { extractEntrySlug, getPublishedProjects } from '@/lib/content';
+
+interface Props {
+  lang: Locale;
+}
+
+const { lang } = Astro.props;
+const t = getTranslations(lang);
+const projects = await getPublishedProjects(lang);
+const dateFormatter = new Intl.DateTimeFormat(lang === 'de' ? 'de-CH' : 'en-US', {
+  year: 'numeric',
+  month: 'short',
+  day: 'numeric',
+});
+---
+
+<BaseLayout
+  lang={lang}
+  title={t.meta.projectsTitle}
+  description={t.meta.projectsDescription}
+  canonicalPath={localePath(lang, '/projects')}
+  alternateEnPath={localePath('en', '/projects')}
+  alternateDePath={localePath('de', '/projects')}
+>
+  <section class="relative py-20 md:py-28">
+    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+      <div class="mb-8">
+        <a
+          href={localePath(lang, '/')}
+          class="inline-flex items-center gap-2 text-sm font-medium text-teal-400 transition-colors hover:text-teal-300"
+        >
+          <span aria-hidden="true">&larr;</span>
+          {t.collections.backToHome}
+        </a>
+      </div>
+
+      <header class="mb-14 max-w-3xl">
+        <h1
+          id="main-heading"
+          tabindex="-1"
+          class="text-3xl font-extrabold tracking-tight text-white focus:outline-none sm:text-4xl lg:text-5xl"
+        >
+          {t.collections.projectsHeading}
+        </h1>
+        <p class="mt-4 text-lg text-slate-300">
+          {t.collections.projectsSubheading}
+        </p>
+      </header>
+
+      {
+        projects.length === 0 ? (
+          <div class="rounded-2xl border border-slate-800 bg-slate-900/60 p-8 sm:p-10">
+            <p class="text-base leading-relaxed text-slate-300">
+              {t.collections.projectsEmpty}
+            </p>
+            <div class="mt-6 flex flex-wrap gap-4">
+              <a
+                href={`${localePath(lang, '/')}#contact`}
+                class="inline-flex items-center justify-center rounded-xl bg-teal-500 px-6 py-3 text-sm font-semibold text-slate-950 transition-colors hover:bg-teal-400"
+              >
+                {t.nav.contact}
+              </a>
+              <a
+                href={SITE_CONFIG.bookingUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                class="inline-flex items-center justify-center rounded-xl border border-slate-700 bg-slate-900 px-6 py-3 text-sm font-semibold text-slate-100 transition-colors hover:border-teal-400 hover:text-teal-300"
+              >
+                {t.contact.bookCallButton}
+                <span class="sr-only"> {t.a11y.externalNewTab}</span>
+              </a>
+            </div>
+          </div>
+        ) : (
+          <div class="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
+            {projects.map((project) => {
+              const slug = extractEntrySlug(project.id);
+              const href = localePath(lang, `/projects/${slug}`);
+              return (
+                <article class="glow-card group flex flex-col justify-between rounded-2xl border border-slate-800 bg-slate-900/70 p-7 transition-all duration-300">
+                  <div>
+                    <div class="mb-4 flex flex-wrap items-center justify-between gap-2 text-xs text-slate-400">
+                      <time datetime={project.data.pubDate.toISOString()}>
+                        {dateFormatter.format(project.data.pubDate)}
+                      </time>
+                      {project.data.industry && (
+                        <span class="rounded-full border border-slate-700 bg-slate-800/80 px-2.5 py-0.5 text-teal-300">
+                          {project.data.industry}
+                        </span>
+                      )}
+                    </div>
+
+                    <h2 class="text-xl font-bold text-white transition-colors group-hover:text-teal-300">
+                      <a href={href} class="focus:outline-none">
+                        {project.data.title}
+                      </a>
+                    </h2>
+
+                    <p class="mt-3 text-sm leading-relaxed text-slate-300">
+                      {project.data.description}
+                    </p>
+
+                    {project.data.tags.length > 0 && (
+                      <ul class="mt-5 flex flex-wrap gap-2" aria-label="Tags">
+                        {project.data.tags.map((tag) => (
+                          <li class="rounded-md border border-slate-800 bg-slate-950/70 px-2 py-0.5 font-mono text-xs text-slate-400">
+                            {tag}
+                          </li>
+                        ))}
+                      </ul>
+                    )}
+                  </div>
+
+                  <div class="mt-6 border-t border-slate-800/80 pt-4">
+                    <a
+                      href={href}
+                      class="inline-flex items-center gap-2 text-sm font-semibold text-teal-400 transition-colors hover:text-teal-300"
+                    >
+                      {t.collections.readMore}
+                      <span aria-hidden="true">&rarr;</span>
+                    </a>
+                  </div>
+                </article>
+              );
+            })}
+          </div>
+        )
+      }
+    </div>
+  </section>
+</BaseLayout>

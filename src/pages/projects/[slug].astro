@@ -1,0 +1,18 @@
+---
+// Governing: ADR-0001 (Astro Content Collections), ADR-0002 (EN/DE routing)
+// Implements: SPEC-0002 REQ "Localized Collection Listing and Detail Routes"
+import ProjectDetailPage from '@/components/pages/ProjectDetailPage.astro';
+import { extractEntrySlug, getPublishedProjects } from '@/lib/content';
+
+export async function getStaticPaths() {
+  const entries = await getPublishedProjects('en');
+  return entries.map((entry) => ({
+    params: { slug: extractEntrySlug(entry.id) },
+    props: { entry },
+  }));
+}
+
+const { entry } = Astro.props;
+---
+
+<ProjectDetailPage lang="en" entry={entry} />

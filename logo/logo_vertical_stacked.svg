@@ -1,0 +1,62 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 220" width="100%" height="100%">
+  <defs>
+    <!-- Deep blue-to-cyan neon gradient -->
+    <linearGradient id="neonGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#3730a3" />
+      <stop offset="50%" stop-color="#0284c7" />
+      <stop offset="100%" stop-color="#2dd4bf" />
+    </linearGradient>
+    <filter id="glow" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur stdDeviation="3.5" result="blur" />
+      <feComposite in="SourceGraphic" in2="blur" operator="over" />
+    </filter>
+    <filter id="glow-light" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur stdDeviation="1.5" result="blur" />
+      <feComposite in="SourceGraphic" in2="blur" operator="over" />
+    </filter>
+  </defs>
+
+  <!-- Center the icon group horizontally -->
+  <g transform="translate(50, 10)">
+    <!-- The "Secure Local" Hexagon Shield -->
+    <polygon points="100,5 185,30 185,90 100,115 15,90 15,30" fill="none" stroke="url(#neonGrad)" stroke-width="1.5" filter="url(#glow)"/>
+    <polygon points="100,5 185,30 185,90 100,115 15,90 15,30" fill="none" stroke="#2dd4bf" stroke-width="0.5" opacity="0.6"/>
+
+    <!-- The "AI Neural Brain" Paths (Glow Layer) -->
+    <path d="M 100 15 L 60 25 L 30 45 L 30 75 L 55 100 L 85 105 L 100 90 L 115 105 L 145 100 L 170 75 L 170 45 L 140 25 Z M 100 15 L 100 45 M 60 25 L 65 55 L 30 45 M 140 25 L 135 55 L 170 45 M 65 55 L 100 45 L 135 55 M 65 55 L 75 80 L 30 75 M 135 55 L 125 80 L 170 75 M 55 100 L 75 80 L 85 105 M 145 100 L 125 80 L 115 105 M 75 80 L 100 90 L 125 80 M 100 45 L 100 90" fill="none" stroke="url(#neonGrad)" stroke-width="2.5" filter="url(#glow)"/>
+    
+    <!-- The "AI Neural Brain" Paths (Solid Core Layer) -->
+    <path d="M 100 15 L 60 25 L 30 45 L 30 75 L 55 100 L 85 105 L 100 90 L 115 105 L 145 100 L 170 75 L 170 45 L 140 25 Z M 100 15 L 100 45 M 60 25 L 65 55 L 30 45 M 140 25 L 135 55 L 170 45 M 65 55 L 100 45 L 135 55 M 65 55 L 75 80 L 30 75 M 135 55 L 125 80 L 170 75 M 55 100 L 75 80 L 85 105 M 145 100 L 125 80 L 115 105 M 75 80 L 100 90 L 125 80 M 100 45 L 100 90" fill="none" stroke="#cffafe" stroke-width="1" opacity="0.9"/>
+
+    <!-- Neural Nodes (Synapses) -->
+    <g fill="#cffafe" filter="url(#glow-light)">
+      <circle cx="100" cy="15" r="3.5" />
+      <circle cx="60" cy="25" r="3" />
+      <circle cx="140" cy="25" r="3" />
+      <circle cx="30" cy="45" r="3" />
+      <circle cx="170" cy="45" r="3" />
+      <circle cx="30" cy="75" r="3" />
+      <circle cx="170" cy="75" r="3" />
+      <circle cx="55" cy="100" r="3" />
+      <circle cx="145" cy="100" r="3" />
+      <circle cx="85" cy="105" r="2.5" />
+      <circle cx="115" cy="105" r="2.5" />
+      <circle cx="100" cy="90" r="4" fill="#38bdf8" />
+      
+      <!-- Inner Core Nodes -->
+      <circle cx="100" cy="45" r="4.5" fill="#38bdf8" />
+      <circle cx="65" cy="55" r="3" />
+      <circle cx="135" cy="55" r="3" />
+      <circle cx="75" cy="80" r="3" />
+      <circle cx="125" cy="80" r="3" />
+    </g>
+  </g>
+
+  <!-- Text Section below the icon -->
+  <g transform="translate(150, 185)">
+    <!-- Glow text -->
+    <text x="0" y="0" font-family="'Inter', sans-serif" font-size="46" fill="url(#neonGrad)" text-anchor="middle" font-weight="300" filter="url(#glow)">Future<tspan font-weight="700">Ware</tspan></text>
+    <!-- Solid text core -->
+    <text x="0" y="0" font-family="'Inter', sans-serif" font-size="46" fill="#e0f2fe" text-anchor="middle" font-weight="300">Future<tspan font-weight="700">Ware</tspan></text>
+  </g>
+</svg>

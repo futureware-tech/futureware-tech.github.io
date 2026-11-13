@@ -1,0 +1,232 @@
+---
+// Governing: ADR-0001 (Astro + vanilla Canvas 2D neural-network animation)
+// Implements: SPEC-0001 REQ "Visual Theme and Interactive Neural-Network Background"
+
+import { getTranslations, type Locale } from '../i18n/ui';
+
+interface Props {
+  lang: Locale;
+}
+
+const { lang } = Astro.props;
+const t = getTranslations(lang);
+---
+
+<canvas
+  id="network-canvas"
+  aria-hidden="true"
+  class="fixed inset-0 w-full h-full pointer-events-none z-0"
+></canvas>
+
+<button
+  id="motion-toggle"
+  type="button"
+  aria-label={t.a11y.pauseAnimation}
+  data-label-pause={t.a11y.pauseAnimation}
+  data-label-play={t.a11y.playAnimation}
+  class="fixed bottom-4 end-4 z-40 inline-flex items-center justify-center min-h-9 min-w-9 px-2.5 py-1.5 rounded-full bg-gray-900/85 backdrop-blur-md border border-gray-800 text-gray-400 hover:text-white hover:border-gray-600 transition-colors text-xs"
+>
+  <svg
+    data-icon-pause
+    aria-hidden="true"
+    class="w-3.5 h-3.5"
+    fill="none"
+    stroke="currentColor"
+    viewBox="0 0 24 24"
+  >
+    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 9v6m4-6v6"></path>
+  </svg>
+  <svg
+    data-icon-play
+    aria-hidden="true"
+    class="w-3.5 h-3.5 hidden"
+    fill="none"
+    stroke="currentColor"
+    viewBox="0 0 24 24"
+  >
+    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 6l10 6-10 6V6z"></path>
+  </svg>
+</button>
+
+<script>
+  function initNetworkAnimation() {
+    const canvas = document.getElementById('network-canvas') as HTMLCanvasElement | null;
+    const toggleBtn = document.getElementById('motion-toggle') as HTMLButtonElement | null;
+    if (!canvas) return;
+    const ctx = canvas.getContext('2d');
+    if (!ctx) return;
+
+    const reducedMotionQuery = window.matchMedia('(prefers-reduced-motion: reduce)');
+    let userPaused = false;
+    try {
+      userPaused = localStorage.getItem('futureware_motion_paused') === '1';
+    } catch {
+      userPaused = false;
+    }
+
+    let width = 0;
+    let height = 0;
+    let rafId: number | null = null;
+    const mouse: { x: number | null; y: number | null } = { x: null, y: null };
+
+    interface Particle {
+      x: number;
+      y: number;
+      vx: number;
+      vy: number;
+      radius: number;
+    }
+
+    let particles: Particle[] = [];
+
+    function createParticles() {
+      const numParticles = Math.min(Math.floor(window.innerWidth / 12), 120);
+      particles = [];
+      for (let i = 0; i < numParticles; i++) {
+        particles.push({
+          x: Math.random() * width,
+          y: Math.random() * height,
+          vx: (Math.random() - 0.5) * 0.6,
+          vy: (Math.random() - 0.5) * 0.6,
+          radius: Math.random() * 1.5 + 0.5,
+        });
+      }
+    }
+
+    function resize() {
+      if (!canvas) return;
+      width = canvas.width = window.innerWidth;
+      height = canvas.height = window.innerHeight;
+      if (particles.length === 0) {
+        createParticles();
+      }
+      if (!shouldAnimate()) {
+        drawFrame(false);
+      }
+    }
+
+    function shouldAnimate(): boolean {
+      return !reducedMotionQuery.matches && !userPaused && !document.hidden;
+    }
+
+    function syncToggleUi() {
+      const paused = reducedMotionQuery.matches || userPaused;
+      document.documentElement.classList.toggle('motion-paused', paused);
+
+      if (!toggleBtn) return;
+      if (reducedMotionQuery.matches) {
+        toggleBtn.hidden = true;
+        return;
+      }
+      toggleBtn.hidden = false;
+      const pauseLabel = toggleBtn.dataset.labelPause ?? 'Pause background animation';
+      const playLabel = toggleBtn.dataset.labelPlay ?? 'Play background animation';
+      // Change accessible label without setting aria-pressed to avoid "Play, pressed" announcement
+      toggleBtn.setAttribute('aria-label', userPaused ? playLabel : pauseLabel);
+      const pauseIcon = toggleBtn.querySelector('[data-icon-pause]');
+      const playIcon = toggleBtn.querySelector('[data-icon-play]');
+      pauseIcon?.classList.toggle('hidden', userPaused);
+      playIcon?.classList.toggle('hidden', !userPaused);
+    }
+
+    function drawFrame(advance: boolean) {
+      if (!ctx) return;
+      ctx.clearRect(0, 0, width, height);
+
+      for (let i = 0; i < particles.length; i++) {
+        const p = particles[i];
+
+        if (advance) {
+          p.x += p.vx;
+          p.y += p.vy;
+
+          if (p.x < 0 || p.x > width) p.vx *= -1;
+          if (p.y < 0 || p.y > height) p.vy *= -1;
+        }
+
+        ctx.beginPath();
+        ctx.arc(p.x, p.y, p.radius, 0, Math.PI * 2);
+        ctx.fillStyle = 'rgba(56, 189, 248, 0.4)';
+        ctx.fill();
+
+        for (let j = i + 1; j < particles.length; j++) {
+          const p2 = particles[j];
+          const dist = Math.hypot(p.x - p2.x, p.y - p2.y);
+          if (dist < 120) {
+            ctx.beginPath();
+            ctx.moveTo(p.x, p.y);
+            ctx.lineTo(p2.x, p2.y);
+            ctx.strokeStyle = `rgba(56, 189, 248, ${0.2 - dist / 600})`;
+            ctx.lineWidth = 0.5;
+            ctx.stroke();
+          }
+        }
+
+        if (advance && mouse.x != null && mouse.y != null) {
+          const distMouse = Math.hypot(p.x - mouse.x, p.y - mouse.y);
+          if (distMouse < 150) {
+            ctx.beginPath();
+            ctx.moveTo(p.x, p.y);
+            ctx.lineTo(mouse.x, mouse.y);
+            ctx.strokeStyle = `rgba(56, 189, 248, ${0.4 - distMouse / 375})`;
+            ctx.lineWidth = 1;
+            ctx.stroke();
+          }
+        }
+      }
+    }
+
+    function loop() {
+      if (!shouldAnimate()) {
+        rafId = null;
+        return;
+      }
+      drawFrame(true);
+      rafId = requestAnimationFrame(loop);
+    }
+
+    function updatePlayback() {
+      syncToggleUi();
+      if (shouldAnimate()) {
+        if (rafId === null) {
+          rafId = requestAnimationFrame(loop);
+        }
+      } else {
+        if (rafId !== null) {
+          cancelAnimationFrame(rafId);
+          rafId = null;
+        }
+        drawFrame(false);
+      }
+    }
+
+    window.addEventListener('mousemove', (e) => {
+      mouse.x = e.clientX;
+      mouse.y = e.clientY;
+    });
+
+    window.addEventListener('mouseout', () => {
+      mouse.x = null;
+      mouse.y = null;
+    });
+
+    window.addEventListener('resize', resize);
+    document.addEventListener('visibilitychange', updatePlayback);
+    reducedMotionQuery.addEventListener('change', updatePlayback);
+
+    toggleBtn?.addEventListener('click', () => {
+      userPaused = !userPaused;
+      try {
+        localStorage.setItem('futureware_motion_paused', userPaused ? '1' : '0');
+      } catch {
+        // Ignore storage restrictions
+      }
+      updatePlayback();
+    });
+
+    resize();
+    updatePlayback();
+  }
+
+  initNetworkAnimation();
+</script>

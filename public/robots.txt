@@ -1,0 +1,7 @@
+# Governing: ADR-0001 (Astro 5 + Tailwind CSS static site)
+# Implements: SPEC-0001 REQ "GitHub Pages Static Build and CI/CD Deployment"
+
+User-agent: *
+Allow: /
+
+Sitemap: https://futureware.ch/sitemap-index.xml
