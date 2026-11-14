@@ -3,11 +3,6 @@
 
 export const SITE_CONFIG = {
   siteUrl: 'https://futureware.dev',
-  domainLabel: {
-    prefix: 'future',
-    accent: 'ware',
-    tld: '.dev',
-  },
   company: {
     legalName: 'FutureWare GmbH',
     englishLegalAlias: 'FutureWare LLC',

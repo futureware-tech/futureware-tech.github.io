@@ -103,7 +103,7 @@ flowchart TD
 
 1. Build and verify the static site on a GitHub Pages preview URL (`https://<org-or-user>.github.io/<repo>/`) before switching production DNS.
 2. Add the Web3Forms public access key (configured for `contact@futureware.ch`) or Formspree endpoint in GitHub Actions repository variables (`PUBLIC_WEB3FORMS_KEY`).
-3. Configure custom domain `futureware.ch` in GitHub Pages settings (matching `public/CNAME`) and update DNS `A`/`AAAA` (`185.199.108.153`–`.111.153`) and `www` `CNAME` records away from Squarespace.
+3. Configure custom domain `futureware.dev` in GitHub Pages settings (GitHub Actions ignores `CNAME` files) and update DNS `A`/`AAAA` (`185.199.108.153`–`.111.153`) and `www` `CNAME` records away from Squarespace.
 4. Enable **"Enforce HTTPS"** in GitHub Pages once Let's Encrypt certificate provisioning completes.
 5. **Rollback**: Re-point DNS records to Squarespace if an urgent rollback is required during cutover.
 

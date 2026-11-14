@@ -39,7 +39,7 @@ Chosen option: **"Option 1: Astro 5 + Tailwind CSS + Astro Content Collections (
 
 ### Confirmation
 
-Compliance is confirmed when `npm run build` produces a purely static `dist/` bundle containing compiled Tailwind CSS, localized HTML routes, `CNAME` (`futureware.dev`), and sitemap XML, with zero runtime framework hydration scripts and passing Lighthouse performance/accessibility checks.
+Compliance is confirmed when `npm run build` produces a purely static `dist/` bundle containing compiled Tailwind CSS, localized HTML routes, favicons, and sitemap XML, with zero runtime framework hydration scripts and passing Lighthouse performance/accessibility checks.
 
 ## Pros and Cons of the Options
 
@@ -83,11 +83,11 @@ flowchart LR
 
     subgraph CI["GitHub Actions CI/CD"]
         Build["Astro Static Build (npm run build)"]
-        Artifact["Static Bundle (dist/ + CNAME + sitemap)"]
+        Artifact["Static Bundle (dist/ + sitemap)"]
     end
 
     subgraph Runtime["Browser / Static Hosting"]
-        GHP["GitHub Pages CDN (futureware.ch)"]
+        GHP["GitHub Pages CDN (futureware.dev)"]
         Canvas["Vanilla Canvas Particle Animation"]
     end
 
