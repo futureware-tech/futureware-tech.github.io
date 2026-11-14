@@ -1,0 +1,81 @@
+---
+// Governing: ADR-0001 (Astro + Tailwind CSS), ADR-0002 (EN/DE subpath routing)
+// Implements: SPEC-0001 REQ "Localized Legal Pages and Footer"
+
+import BrandLogo from './BrandLogo.astro';
+import { SITE_CONFIG } from '../config/site';
+import { getTranslations, localePath, type Locale } from '../i18n/ui';
+
+interface Props {
+  lang: Locale;
+  currentPath: string;
+}
+
+const { lang, currentPath } = Astro.props;
+const t = getTranslations(lang);
+const homeHref = localePath(lang, '/');
+const imprintHref = localePath(lang, '/imprint');
+const privacyHref = localePath(lang, '/privacy');
+const currentYear = new Date().getFullYear();
+
+const isImprint = currentPath === '/imprint' || currentPath === '/imprint/' || currentPath === '/de/imprint' || currentPath === '/de/imprint/';
+const isPrivacy = currentPath === '/privacy' || currentPath === '/privacy/' || currentPath === '/de/privacy' || currentPath === '/de/privacy/';
+---
+
+<footer class="bg-dark/90 backdrop-blur-md border-t border-gray-800 py-10 mt-auto relative z-10">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row justify-between items-center gap-6">
+    <div class="text-center md:text-start">
+      <a
+        href={homeHref}
+        class="inline-flex items-center justify-center md:justify-start rounded-lg transition-opacity hover:opacity-90"
+      >
+        <BrandLogo idPrefix="fw-footer" class="h-9 w-auto" />
+        <span class="visually-hidden">FutureWare</span>
+      </a>
+      <p class="text-gray-400 text-sm mt-2">{t.footer.tagline}</p>
+      <p class="text-gray-500 text-xs mt-1">
+        {SITE_CONFIG.company.legalName} · {SITE_CONFIG.company.street}, {SITE_CONFIG.company.postalCode} {SITE_CONFIG.company.city} ·{' '}
+        <a
+          href={`mailto:${SITE_CONFIG.company.email}`}
+          class="text-gray-400 hover:text-brand-400 transition-colors underline underline-offset-2"
+        >
+          {SITE_CONFIG.company.email}
+        </a>
+      </p>
+    </div>
+
+    <nav aria-label={t.a11y.footerNav}>
+      <ul class="flex flex-wrap justify-center gap-6 text-sm text-gray-400">
+        <li>
+          <a
+            href={imprintHref}
+            aria-current={isImprint ? 'page' : undefined}
+            class="site-nav-link inline-flex items-center min-h-8 hover:text-white transition-colors"
+          >
+            {t.footer.imprint}
+          </a>
+        </li>
+        <li>
+          <a
+            href={privacyHref}
+            aria-current={isPrivacy ? 'page' : undefined}
+            class="site-nav-link inline-flex items-center min-h-8 hover:text-white transition-colors"
+          >
+            {t.footer.privacy}
+          </a>
+        </li>
+      </ul>
+    </nav>
+  </div>
+
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-8 text-center text-gray-500 text-sm">
+    &copy; <span id="footer-year">{currentYear}</span> Futureware.dev. {t.footer.rights}
+  </div>
+</footer>
+
+<script>
+  const yearEl = document.getElementById('footer-year');
+  if (yearEl) {
+    yearEl.textContent = String(new Date().getFullYear());
+  }
+</script>

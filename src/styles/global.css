@@ -1,0 +1,230 @@
+/* Governing: ADR-0001 (Astro + Tailwind CSS static site), ADR-0002 (EN/DE routing) */
+/* Implements: SPEC-0001 REQ "Visual Theme and Interactive Neural-Network Background", SPEC-0001 REQ "Bilingual Navigation and Localized SEO Routing", SPEC-0001 REQ "Serverless Contact Form and Consultation Alternatives" */
+
+@import "tailwindcss";
+@plugin "@tailwindcss/typography";
+
+@theme {
+  --font-sans: 'Inter Variable', 'Inter', ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --color-dark: #030712;
+  --color-brand-50: #f0f9ff;
+  --color-brand-100: #e0f2fe;
+  --color-brand-400: #38bdf8;
+  --color-brand-500: #0ea5e9;
+  --color-brand-600: #0284c7;
+  --color-brand-900: #0c4a6e;
+  --color-brand-950: #082f49;
+}
+
+@layer base {
+  html {
+    background-color: var(--color-dark);
+    color: #f9fafb;
+    font-family: var(--font-sans);
+    line-height: 1.5;
+    text-align: start;
+    overflow-wrap: break-word;
+
+    @media (prefers-reduced-motion: no-preference) {
+      scroll-behavior: smooth;
+    }
+  }
+
+  body {
+    background-color: var(--color-dark);
+    color: #f9fafb;
+    min-block-size: 100dvh;
+  }
+
+  h1,
+  h2 {
+    text-wrap: balance;
+  }
+
+  p,
+  blockquote,
+  li {
+    text-wrap: pretty;
+  }
+
+  :where(a:any-link, button, input, textarea, select):focus-visible {
+    outline: 2px solid var(--color-brand-400);
+    outline-offset: 3px;
+  }
+}
+
+/* Visually hidden utility (preserves accessibility tree; reveals on focus for skip link) */
+.visually-hidden:where(:not(:focus-within, :active)) {
+  position: absolute !important;
+  clip-path: inset(50%) !important;
+  overflow: hidden !important;
+  width: 1px !important;
+  height: 1px !important;
+  margin: -1px !important;
+  padding: 0 !important;
+  border: 0 !important;
+  white-space: nowrap !important;
+}
+
+.skip-link:is(:focus, :focus-visible, :active) {
+  position: fixed;
+  inset-block-start: 1rem;
+  inset-inline-start: 1rem;
+  z-index: 100;
+  padding: 0.75rem 1.25rem;
+  border-radius: 9999px;
+  background-color: var(--color-brand-500);
+  color: #ffffff;
+  font-weight: 600;
+  box-shadow: 0 10px 25px rgba(2, 132, 199, 0.45);
+}
+
+/* Brand gradients from futureware_website.html */
+.text-gradient {
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-image: linear-gradient(to right, #38bdf8, #818cf8);
+}
+
+.bg-gradient-brand {
+  background-image: linear-gradient(to right, #0ea5e9, #6366f1);
+}
+
+/* Card hover glow (dampens spatial translation when reduced motion is preferred) */
+.glow-card {
+  transition: box-shadow 0.3s ease, border-color 0.3s ease, transform 0.3s ease;
+}
+
+.glow-card:hover {
+  box-shadow: 0 0 20px rgba(56, 189, 248, 0.15);
+  border-color: rgba(56, 189, 248, 0.4);
+
+  @media (prefers-reduced-motion: no-preference) {
+    transform: translateY(-2px);
+  }
+}
+
+/* Responsive site navigation: single semantic <nav> with Popover narrow mode & measured inline wide mode */
+.site-header .header-inner > * {
+  flex-shrink: 0;
+  white-space: nowrap;
+}
+
+.site-header.is-measuring,
+.site-header.is-measuring * {
+  transition: none !important;
+}
+
+.site-header .menu-button {
+  anchor-name: --menu-button;
+}
+
+.site-header .site-menu {
+  position: fixed;
+  inset: auto;
+  /* Fixed offset fallback for browsers without CSS Anchor Positioning */
+  inset-block-start: 5.25rem;
+  inset-block-start: anchor(--menu-button bottom);
+  inset-inline-end: 1rem;
+  inline-size: min(85dvw, 22rem);
+  max-inline-size: calc(100dvw - 2rem);
+  block-size: fit-content;
+  max-block-size: calc(100dvh - 6.5rem);
+  margin-block-start: 0.5rem;
+  padding: 1rem;
+  border-radius: 1rem;
+  border: 1px solid #1f2937;
+  background-color: rgba(3, 7, 18, 0.96);
+  backdrop-filter: blur(16px);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.65);
+  overflow: auto;
+  list-style: none;
+}
+
+.site-header .site-menu[popover]:not(:is(:popover-open, .\:popover-open)) {
+  display: none;
+}
+
+.site-header .site-menu[popover]:is(:popover-open, .\:popover-open) {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.site-header.is-wide .menu-button {
+  display: none;
+}
+
+.site-header.is-wide .site-menu {
+  position: static;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 1.75rem;
+  inline-size: auto;
+  max-inline-size: none;
+  block-size: auto;
+  max-block-size: none;
+  overflow: visible;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+  backdrop-filter: none;
+  box-shadow: none;
+}
+
+.site-header.is-wide .site-menu::backdrop {
+  display: none;
+}
+
+.site-nav-link[aria-current="page"] {
+  color: #ffffff;
+  text-decoration: underline;
+  text-decoration-color: var(--color-brand-400);
+  text-decoration-thickness: 2px;
+  text-underline-offset: 0.4rem;
+}
+
+@media (forced-colors: active) {
+  .site-nav-link[aria-current="page"] {
+    text-decoration-color: Highlight;
+  }
+}
+
+/* Deferred post-interaction form validation (:user-invalid + JS fallback class) */
+.form-control {
+  font: inherit;
+  font-size: max(1rem, 1em);
+  min-block-size: 3rem;
+}
+
+@media (pointer: coarse) {
+  .form-control {
+    min-block-size: 3.25rem;
+  }
+}
+
+.field-error-msg {
+  display: none;
+  color: #f87171;
+  font-size: 0.875rem;
+  margin-block-start: 0.375rem;
+}
+
+.form-control:is(:user-invalid, .user-invalid-fallback) {
+  border-color: #ef4444;
+  background-color: rgba(127, 29, 29, 0.18);
+}
+
+.form-control:is(:user-invalid, .user-invalid-fallback) + .field-error-msg {
+  display: flex;
+  align-items: center;
+  gap: 0.375rem;
+}
+
+.form-control:user-valid {
+  border-color: rgba(56, 189, 248, 0.55);
+}

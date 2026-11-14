@@ -1,0 +1,117 @@
+---
+// Governing: ADR-0001 (Astro + Tailwind CSS static site), ADR-0002 (Bilingual EN/DE subpath routing and hreflang SEO)
+// Implements: SPEC-0001 REQ "Visual Theme and Interactive Neural-Network Background", SPEC-0001 REQ "Bilingual Navigation and Localized SEO Routing"
+
+import '@fontsource-variable/inter';
+import '../styles/global.css';
+import { SITE_CONFIG } from '../config/site';
+import { getTranslations, localePath, type Locale } from '../i18n/ui';
+import { getCollectionNavVisibility } from '../lib/content';
+import NetworkCanvas from '../components/NetworkCanvas.astro';
+import Navbar from '../components/Navbar.astro';
+import Footer from '../components/Footer.astro';
+
+interface Props {
+  lang: Locale;
+  title: string;
+  description: string;
+  canonicalPath: string;
+  alternateEnPath?: string | null;
+  alternateDePath?: string | null;
+  switchEnHref?: string;
+  switchDeHref?: string;
+}
+
+const {
+  lang,
+  title,
+  description,
+  canonicalPath,
+  alternateEnPath = localePath('en', canonicalPath),
+  alternateDePath = localePath('de', canonicalPath),
+  switchEnHref,
+  switchDeHref,
+} = Astro.props;
+
+const t = getTranslations(lang);
+const navVisibility = await getCollectionNavVisibility(lang);
+
+const canonicalUrl = new URL(
+  lang === 'de' && !canonicalPath.startsWith('/de')
+    ? localePath('de', canonicalPath)
+    : canonicalPath,
+  SITE_CONFIG.siteUrl,
+).toString();
+
+const enUrl = alternateEnPath ? new URL(alternateEnPath, SITE_CONFIG.siteUrl).toString() : null;
+const deUrl = alternateDePath ? new URL(alternateDePath, SITE_CONFIG.siteUrl).toString() : null;
+
+const enSwitchHref = switchEnHref ?? alternateEnPath ?? localePath('en', '/');
+const deSwitchHref = switchDeHref ?? alternateDePath ?? localePath('de', '/');
+
+const cspContent = [
+  "default-src 'self'",
+  "script-src 'self' 'unsafe-inline'",
+  "style-src 'self' 'unsafe-inline'",
+  "font-src 'self' data:",
+  "img-src 'self' data:",
+  "connect-src 'self' https://api.web3forms.com https://formspree.io",
+  "form-action 'self' https://api.web3forms.com https://formspree.io",
+  "base-uri 'self'",
+  "object-src 'none'",
+].join('; ');
+---
+
+<!DOCTYPE html>
+<html lang={lang}>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="referrer" content="strict-origin-when-cross-origin" />
+    <meta http-equiv="Content-Security-Policy" content={cspContent} />
+
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
+    <link rel="icon" type="image/png" sizes="192x192" href="/favicon.png" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+    <link rel="canonical" href={canonicalUrl} />
+
+    {enUrl && <link rel="alternate" hreflang="en" href={enUrl} />}
+    {deUrl && <link rel="alternate" hreflang="de" href={deUrl} />}
+    {enUrl && <link rel="alternate" hreflang="x-default" href={enUrl} />}
+
+    <meta property="og:site_name" content="Futureware" />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonicalUrl} />
+    <meta property="og:locale" content={lang === 'de' ? 'de_CH' : 'en_US'} />
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+  </head>
+  <body class="antialiased selection:bg-brand-500 selection:text-white flex flex-col min-h-screen relative">
+    <a href="#main-heading" class="skip-link visually-hidden">
+      {t.a11y.skipToContent}
+    </a>
+
+    <NetworkCanvas lang={lang} />
+
+    <Navbar
+      lang={lang}
+      currentPath={Astro.url.pathname}
+      enHref={enSwitchHref}
+      deHref={deSwitchHref}
+      showProjects={navVisibility.showProjects}
+      showBlog={navVisibility.showBlog}
+    />
+
+    <main id="main-content" class="flex-grow flex flex-col relative z-10">
+      <slot />
+    </main>
+
+    <Footer lang={lang} currentPath={Astro.url.pathname} />
+  </body>
+</html>

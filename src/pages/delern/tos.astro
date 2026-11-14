@@ -1,0 +1,16 @@
+---
+// Governing: ADR-0001 (Astro + Tailwind CSS static site)
+// Implements: SPEC-0001 REQ "Localized Legal Pages and Footer"
+import AppLegalPage from '@/components/pages/AppLegalPage.astro';
+import { Content as DelernTos } from '../../../delern/tos.md';
+---
+
+<AppLegalPage
+  title="Delern Flashcards Terms of Service | Futureware"
+  description="Terms of Service for Delern Flashcards operated by FutureWare GmbH."
+  canonicalPath="/delern/tos"
+  eyebrow="Legal · Delern Flashcards"
+  heading="Delern Flashcards Terms of Service"
+>
+  <DelernTos />
+</AppLegalPage>

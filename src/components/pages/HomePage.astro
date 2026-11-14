@@ -1,0 +1,318 @@
+---
+// Governing: ADR-0001 (Astro + Tailwind CSS), ADR-0002 (EN/DE routing and locale-invariant review), ADR-0003 (Serverless contact form and Google Calendar booking)
+// Implements: SPEC-0001 REQ "Hero, Core Capabilities, and Value Proposition Sections", SPEC-0001 REQ "Customer Review Section", SPEC-0001 REQ "Serverless Contact Form and Consultation Alternatives"
+
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { SITE_CONFIG } from '../../config/site';
+import { getTranslations, localePath, type Locale } from '../../i18n/ui';
+import ContactForm from '../ContactForm.astro';
+
+interface Props {
+  lang: Locale;
+}
+
+const { lang } = Astro.props;
+const t = getTranslations(lang);
+
+const accentStyles = {
+  brand: 'bg-brand-900/50 text-brand-400 border-brand-500/20',
+  purple: 'bg-purple-900/50 text-purple-400 border-purple-500/20',
+  green: 'bg-green-900/50 text-green-400 border-green-500/20',
+  orange: 'bg-orange-900/50 text-orange-400 border-orange-500/20',
+} as const;
+---
+
+<BaseLayout
+  lang={lang}
+  title={t.meta.homeTitle}
+  description={t.meta.homeDescription}
+  canonicalPath={localePath(lang, '/')}
+  alternateEnPath={localePath('en', '/')}
+  alternateDePath={localePath('de', '/')}
+>
+<section class="pt-20 pb-20 md:pt-32 md:pb-32 relative overflow-hidden">
+  <div
+    aria-hidden="true"
+    class="absolute top-0 left-1/2 -translate-x-1/2 w-full h-[500px] opacity-20 pointer-events-none"
+    style="background: radial-gradient(circle, #38bdf8 0%, transparent 60%);"
+  ></div>
+
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 text-center">
+    <h1
+      id="main-heading"
+      tabindex="-1"
+      class="text-4xl md:text-6xl lg:text-7xl font-bold tracking-tight mb-6 focus:outline-none"
+    >
+      <span>{t.hero.titleLead}</span>
+      <br />
+      <span class="text-gradient">{t.hero.titleAccent}</span>
+    </h1>
+
+    <p class="mt-4 text-lg md:text-xl text-gray-300 max-w-3xl mx-auto mb-10">
+      {t.hero.subtitle}
+    </p>
+
+    <div class="flex flex-col sm:flex-row justify-center items-center gap-4">
+      <a
+        href="#services"
+        class="inline-flex items-center justify-center min-h-12 px-8 py-4 rounded-full bg-gradient-brand text-white font-medium hover:shadow-lg hover:shadow-brand-500/30 transition-shadow w-full sm:w-auto"
+      >
+        {t.hero.primaryCta}
+      </a>
+      <a
+        href={SITE_CONFIG.bookingUrl}
+        target="_blank"
+        rel="noopener noreferrer"
+        class="inline-flex items-center justify-center min-h-12 px-8 py-4 rounded-full bg-transparent border border-gray-600 text-white font-medium hover:bg-gray-800 hover:border-gray-400 transition-colors w-full sm:w-auto"
+      >
+        {t.hero.secondaryCta}
+        <span class="visually-hidden"> {t.a11y.externalNewTab}</span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<section id="services" class="py-20 bg-gray-900/50 backdrop-blur-sm border-y border-gray-800">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="text-center mb-16">
+      <h2 class="text-3xl md:text-4xl font-bold mb-4">{t.services.heading}</h2>
+      <p class="text-gray-400 max-w-2xl mx-auto">{t.services.subheading}</p>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+      {
+        t.services.items.map((service) => (
+          <article class="bg-gray-950 p-8 rounded-2xl border border-gray-800 glow-card flex flex-col">
+            <div
+              class:list={[
+                'w-12 h-12 rounded-lg flex items-center justify-center mb-6 border',
+                accentStyles[service.accent],
+              ]}
+            >
+              {service.id === 'local-ai' && (
+                <svg aria-hidden="true" class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24">
+                  <rect x="5" y="11" width="14" height="10" rx="2" />
+                  <path stroke-linecap="round" d="M8 11V7a4 4 0 018 0v4" />
+                  <circle cx="12" cy="16" r="1.25" fill="currentColor" />
+                </svg>
+              )}
+              {service.id === 'rag-systems' && (
+                <svg aria-hidden="true" class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24">
+                  <rect x="4" y="4" width="11" height="13" rx="2" />
+                  <rect x="9" y="8" width="11" height="12" rx="2" />
+                  <path stroke-linecap="round" d="M12 12h5M12 15.5h5" />
+                </svg>
+              )}
+              {service.id === 'task-automation' && (
+                <svg aria-hidden="true" class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M13 3L5 14h6l-1 7 9-11h-6l0-7z" />
+                </svg>
+              )}
+              {service.id === 'custom-agents' && (
+                <svg aria-hidden="true" class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M4 6a2 2 0 012-2h12a2 2 0 012 2v8a2 2 0 01-2 2H9l-5 4V6z" />
+                  <circle cx="9" cy="10" r="1" fill="currentColor" />
+                  <circle cx="15" cy="10" r="1" fill="currentColor" />
+                </svg>
+              )}
+            </div>
+
+            <h3 class="text-xl font-semibold mb-3 text-white">{service.title}</h3>
+            <p class="text-gray-400 flex-grow leading-relaxed">{service.description}</p>
+          </article>
+        ))
+      }
+    </div>
+  </div>
+</section>
+
+<section id="benefits" class="py-20">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="flex flex-col lg:flex-row gap-12 items-center">
+      <div class="lg:w-1/2">
+        <h2 class="text-3xl md:text-4xl font-bold mb-6">
+          {t.benefits.headingPrefix}{' '}
+          <span class="text-brand-400">{t.benefits.headingBrand}</span>{t.benefits.headingSuffix}
+        </h2>
+        <ul role="list" class="space-y-6">
+          {
+            t.benefits.items.map((benefit) => (
+              <li class="flex items-start">
+                <div class="flex-shrink-0 w-8 h-8 rounded-full bg-brand-900/50 flex items-center justify-center text-brand-400 mt-1">
+                  <svg aria-hidden="true" class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" />
+                  </svg>
+                </div>
+                <div class="ms-4">
+                  <h3 class="text-lg font-semibold text-white">{benefit.title}</h3>
+                  <p class="text-gray-400 mt-1 leading-relaxed">{benefit.description}</p>
+                </div>
+              </li>
+            ))
+          }
+        </ul>
+      </div>
+
+      <div class="lg:w-1/2 w-full">
+        <figure
+          aria-labelledby="benefits-arch-caption"
+          class="glow-card relative w-full rounded-2xl overflow-hidden border border-gray-800 bg-gray-900/80 backdrop-blur-sm p-6 sm:p-8"
+        >
+          <div
+            aria-hidden="true"
+            class="pointer-events-none absolute -top-24 -right-24 h-56 w-56 rounded-full bg-brand-500/10 blur-3xl"
+          ></div>
+
+          <div class="relative z-10 flex flex-wrap items-center justify-between gap-2 pb-5 mb-6 border-b border-gray-800">
+            <span class="inline-flex items-center gap-2 text-xs font-mono font-medium uppercase tracking-wider text-teal-300">
+              <span aria-hidden="true" class="h-2 w-2 rounded-full bg-teal-400"></span>
+              {t.benefits.architecture.perimeterLabel}
+            </span>
+            <span class="rounded-full border border-brand-500/30 bg-brand-950/70 px-3 py-1 text-xs font-medium text-brand-100">
+              {t.benefits.architecture.complianceBadge}
+            </span>
+          </div>
+
+          <div class="relative z-10 space-y-4">
+            <div class="rounded-xl border border-gray-800 bg-gray-950/70 p-4">
+              <p class="text-xs font-semibold uppercase tracking-wider text-gray-400 mb-3">
+                {t.benefits.architecture.sourcesHeading}
+              </p>
+              <ul role="list" class="flex flex-wrap gap-2">
+                {
+                  t.benefits.architecture.sources.map((src) => (
+                    <li class="rounded-lg border border-gray-800 bg-gray-900 px-3 py-1.5 text-xs sm:text-sm font-medium text-gray-200">
+                      {src}
+                    </li>
+                  ))
+                }
+              </ul>
+            </div>
+
+            <div aria-hidden="true" class="flex justify-center">
+              <div class="flex h-6 w-6 items-center justify-center rounded-full border border-brand-500/30 bg-gray-950 text-brand-400 text-xs">
+                &darr;
+              </div>
+            </div>
+
+            <div class="rounded-xl border border-brand-500/40 bg-gray-950/95 p-4 sm:p-5 shadow-lg shadow-brand-500/5">
+              <div class="flex items-center gap-4">
+                <div class="shrink-0">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    viewBox="0 0 200 120"
+                    aria-hidden="true"
+                    class="h-10 w-16"
+                  >
+                    <defs>
+                      <linearGradient id="arch-hex-grad" x1="0%" y1="0%" x2="100%" y2="100%">
+                        <stop offset="0%" stop-color="#3730a3" />
+                        <stop offset="50%" stop-color="#0284c7" />
+                        <stop offset="100%" stop-color="#2dd4bf" />
+                      </linearGradient>
+                    </defs>
+                    <polygon points="100,5 185,30 185,90 100,115 15,90 15,30" fill="none" stroke="url(#arch-hex-grad)" stroke-width="3" />
+                    <path d="M 100 15 L 60 25 L 30 45 L 30 75 L 55 100 L 85 105 L 100 90 L 115 105 L 145 100 L 170 75 L 170 45 L 140 25 Z M 100 15 L 100 45 M 60 25 L 65 55 L 30 45 M 140 25 L 135 55 L 170 45 M 65 55 L 100 45 L 135 55 M 65 55 L 75 80 L 30 75 M 135 55 L 125 80 L 170 75 M 55 100 L 75 80 L 85 105 M 145 100 L 125 80 L 115 105 M 75 80 L 100 90 L 125 80 M 100 45 L 100 90" fill="none" stroke="#cffafe" stroke-width="1.6" opacity="0.9" />
+                    <circle cx="100" cy="45" r="5" fill="#38bdf8" />
+                    <circle cx="100" cy="90" r="4.5" fill="#38bdf8" />
+                  </svg>
+                </div>
+                <div class="min-w-0">
+                  <p class="text-sm sm:text-base font-bold text-white">
+                    {t.benefits.architecture.coreTitle}
+                  </p>
+                  <p class="text-xs sm:text-sm text-brand-400 mt-0.5">
+                    {t.benefits.architecture.coreSubtitle}
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            <div aria-hidden="true" class="flex justify-center">
+              <div class="flex h-6 w-6 items-center justify-center rounded-full border border-teal-500/30 bg-gray-950 text-teal-400 text-xs">
+                &darr;
+              </div>
+            </div>
+
+            <div class="rounded-xl border border-gray-800 bg-gray-950/70 p-4">
+              <p class="text-xs font-semibold uppercase tracking-wider text-gray-400 mb-3">
+                {t.benefits.architecture.outputsHeading}
+              </p>
+              <ul role="list" class="flex flex-wrap gap-2">
+                {
+                  t.benefits.architecture.outputs.map((out) => (
+                    <li class="rounded-lg border border-teal-500/25 bg-teal-950/40 px-3 py-1.5 text-xs sm:text-sm font-medium text-teal-200">
+                      {out}
+                    </li>
+                  ))
+                }
+              </ul>
+            </div>
+          </div>
+
+          <figcaption
+            id="benefits-arch-caption"
+            class="relative z-10 mt-6 pt-4 border-t border-gray-800 flex items-center gap-2 text-xs text-gray-400"
+          >
+            <svg aria-hidden="true" class="h-4 w-4 shrink-0 text-teal-400" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M12 3l7 4v5c0 5-3.5 8.5-7 9-3.5-.5-7-4-7-9V7l7-4z" />
+              <path stroke-linecap="round" stroke-linejoin="round" d="M9.5 12l2 2 3.5-4" />
+            </svg>
+            <span>{t.benefits.architecture.guarantee}</span>
+          </figcaption>
+        </figure>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="testimonials" class="py-20 bg-gray-900/40 backdrop-blur-sm border-t border-gray-800">
+  <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+    <h2 class="text-3xl md:text-4xl font-bold mb-3">{t.testimonial.heading}</h2>
+    <p class="text-gray-400 mb-12">{t.testimonial.subheading}</p>
+
+    <figure class="bg-gray-950 p-8 md:p-12 rounded-2xl border border-gray-800 glow-card relative">
+      <div aria-hidden="true" class="flex justify-center gap-1.5 text-brand-400 mb-6 text-lg">
+        <span>&#9733;</span>
+        <span>&#9733;</span>
+        <span>&#9733;</span>
+        <span>&#9733;</span>
+        <span>&#9733;</span>
+      </div>
+
+      <blockquote
+        cite={SITE_CONFIG.testimonial.websiteUrl}
+        lang="de"
+        class="text-xl md:text-2xl font-medium text-gray-100 leading-relaxed mb-6"
+      >
+        <p>&bdquo;{SITE_CONFIG.testimonial.quoteDe}&ldquo;</p>
+      </blockquote>
+
+      <figcaption class="flex flex-col sm:flex-row items-center justify-center gap-2 text-sm text-gray-400">
+        <span class="font-semibold text-white">{SITE_CONFIG.testimonial.author}</span>
+        <span aria-hidden="true" class="hidden sm:inline text-gray-600">&middot;</span>
+        <cite class="not-italic">
+          <a
+            href={SITE_CONFIG.testimonial.websiteUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            class="text-brand-400 hover:text-brand-100 transition-colors underline underline-offset-4"
+          >
+            {SITE_CONFIG.testimonial.websiteLabel}
+            <span class="visually-hidden"> {t.a11y.externalNewTab}</span>
+          </a>
+        </cite>
+      </figcaption>
+    </figure>
+  </div>
+</section>
+
+<section id="contact" class="py-20 bg-gray-900/80 backdrop-blur-sm border-t border-gray-800">
+  <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+    <h2 class="text-3xl md:text-4xl font-bold mb-4">{t.contact.heading}</h2>
+    <p class="text-gray-400 mb-8">{t.contact.subheading}</p>
+
+    <ContactForm lang={lang} />
+  </div>
+</section>
+</BaseLayout>
