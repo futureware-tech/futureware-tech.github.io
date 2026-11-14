@@ -4,4 +4,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://futureware.ch/sitemap-index.xml
+Sitemap: https://futureware.dev/sitemap-index.xml

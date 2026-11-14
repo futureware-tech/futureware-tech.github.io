@@ -129,14 +129,14 @@ The website MUST include a consistent footer and dedicated localized legal pages
 The project MUST build deterministically into a static artifact ready for GitHub Pages custom-domain hosting:
 
 - `npm run build` MUST output static HTML/CSS/JS assets to `dist/` with zero server adapter dependencies.
-- `public/CNAME` MUST contain `futureware.ch` so GitHub Pages preserves the custom domain across deployments, and `public/favicon.svg` (plus fallback icon metadata) MUST be included.
-- `@astrojs/sitemap` MUST generate `sitemap-index.xml` referencing `https://futureware.ch` as the canonical `site` origin.
+- `public/CNAME` MUST contain `futureware.dev` so GitHub Pages preserves the custom domain across deployments, and `public/favicon.svg` (plus fallback icon metadata) MUST be included.
+- `@astrojs/sitemap` MUST generate `sitemap-index.xml` referencing `https://futureware.dev` as the canonical `site` origin.
 - A GitHub Actions workflow (`.github/workflows/deploy.yml`) MUST build the Astro project and deploy `dist/` to GitHub Pages on pushes to the default branch (`main` / `master`) and `workflow_dispatch`.
 
 #### Scenario: Automated deployment on branch push
 
 - **WHEN** changes are pushed to the default branch on GitHub with GitHub Pages configured for "GitHub Actions" source
-- **THEN** the workflow installs dependencies, runs `npm run build`, uploads `dist/` (including `CNAME` and sitemap), and publishes the updated site to `https://futureware.ch`
+- **THEN** the workflow installs dependencies, runs `npm run build`, uploads `dist/` (including `CNAME` and sitemap), and publishes the updated site to `https://futureware.dev`
 
 ## Security Requirements
 

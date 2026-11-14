@@ -1,0 +1,58 @@
+---
+// Governing: ADR-0001 (Astro + Tailwind CSS static site), ADR-0002 (EN routing)
+// Implements: SPEC-0001 REQ "Localized Legal Pages and Footer"
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import { getTranslations, localePath } from '@/i18n/ui';
+
+interface Props {
+  title: string;
+  description: string;
+  canonicalPath: string;
+  eyebrow: string;
+  heading: string;
+}
+
+const { title, description, canonicalPath, eyebrow, heading } = Astro.props;
+const t = getTranslations('en');
+---
+
+<BaseLayout
+  lang="en"
+  title={title}
+  description={description}
+  canonicalPath={canonicalPath}
+  alternateEnPath={canonicalPath}
+  alternateDePath={null}
+  switchDeHref={localePath('de', '/')}
+>
+  <article class="relative py-20 md:py-28">
+    <div class="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
+      <div class="mb-8">
+        <a
+          href={localePath('en', '/')}
+          class="inline-flex items-center gap-2 text-sm font-medium text-brand-400 transition-colors hover:text-brand-100"
+        >
+          <span aria-hidden="true">&larr;</span>
+          {t.collections.backToHome}
+        </a>
+      </div>
+
+      <header class="mb-10 border-b border-gray-800 pb-6">
+        <p class="mb-2 font-mono text-xs uppercase tracking-widest text-brand-400">
+          {eyebrow}
+        </p>
+        <h1
+          id="main-heading"
+          tabindex="-1"
+          class="text-3xl font-extrabold tracking-tight text-white focus:outline-none sm:text-4xl"
+        >
+          {heading}
+        </h1>
+      </header>
+
+      <div class="prose prose-invert prose-slate max-w-none prose-headings:text-white prose-a:text-brand-400 hover:prose-a:text-brand-100 prose-strong:text-white prose-code:text-teal-300 prose-pre:bg-gray-900 prose-pre:border prose-pre:border-gray-800">
+        <slot />
+      </div>
+    </div>
+  </article>
+</BaseLayout>

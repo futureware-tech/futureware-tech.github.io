@@ -1,0 +1,16 @@
+---
+// Governing: ADR-0001 (Astro + Tailwind CSS static site)
+// Implements: SPEC-0001 REQ "Localized Legal Pages and Footer"
+import AppLegalPage from '@/components/pages/AppLegalPage.astro';
+import { Content as ComicslatePrivacy } from '../../../comicslate/privacy.md';
+---
+
+<AppLegalPage
+  title="Privacy Policy of Comicslate | Futureware"
+  description="Privacy Policy for Comicslate operated by FutureWare GmbH."
+  canonicalPath="/comicslate/privacy"
+  eyebrow="Privacy · Comicslate"
+  heading="Privacy Policy of Comicslate"
+>
+  <ComicslatePrivacy />
+</AppLegalPage>

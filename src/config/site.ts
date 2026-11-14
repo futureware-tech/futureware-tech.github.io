@@ -2,11 +2,11 @@
 // Implements: SPEC-0001 REQ "Customer Review Section", SPEC-0001 REQ "Serverless Contact Form and Consultation Alternatives", SPEC-0001 REQ "Localized Legal Pages and Footer"
 
 export const SITE_CONFIG = {
-  siteUrl: 'https://futureware.ch',
+  siteUrl: 'https://futureware.dev',
   domainLabel: {
     prefix: 'future',
     accent: 'ware',
-    tld: '.ch',
+    tld: '.dev',
   },
   company: {
     legalName: 'FutureWare GmbH',

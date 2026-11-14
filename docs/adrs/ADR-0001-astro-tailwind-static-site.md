@@ -14,7 +14,7 @@ FutureWare GmbH (`futureware.ch`) is replacing its existing Squarespace website 
 
 ## Decision Drivers
 
-* **GitHub Pages compatibility**: Must build to pure static HTML, CSS, and minimal client-side JS deployable via GitHub Actions with custom domain (`futureware.ch`) support.
+* **GitHub Pages compatibility**: Must build to pure static HTML, CSS, and minimal client-side JS deployable via GitHub Actions with custom domain (`futureware.dev`) support.
 * **Design and animation fidelity**: Must faithfully reproduce the dark visual identity (`#030712`), sky-to-indigo gradients, card glow interactions, and interactive `<canvas>` neural-network particle animation from the approved `futureware_website.html` prototype without relying on the non-production Tailwind Play CDN.
 * **Content extensibility**: Future "Projects / Use-Cases" and "Blog" pages must be authorable in Markdown/MDX with type-safe frontmatter validation, automatic route generation, and sitemap/RSS support.
 * **Bilingual SEO and performance**: Must generate clean static HTML per locale with minimal JavaScript payload (zero UI framework runtime overhead where static markup suffices).
@@ -39,7 +39,7 @@ Chosen option: **"Option 1: Astro 5 + Tailwind CSS + Astro Content Collections (
 
 ### Confirmation
 
-Compliance is confirmed when `npm run build` produces a purely static `dist/` bundle containing compiled Tailwind CSS, localized HTML routes, `CNAME` (`futureware.ch`), and sitemap XML, with zero runtime framework hydration scripts and passing Lighthouse performance/accessibility checks.
+Compliance is confirmed when `npm run build` produces a purely static `dist/` bundle containing compiled Tailwind CSS, localized HTML routes, `CNAME` (`futureware.dev`), and sitemap XML, with zero runtime framework hydration scripts and passing Lighthouse performance/accessibility checks.
 
 ## Pros and Cons of the Options
 

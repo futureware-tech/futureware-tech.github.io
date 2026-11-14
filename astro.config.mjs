@@ -7,7 +7,7 @@ import sitemap from '@astrojs/sitemap';
 import tailwindcss from '@tailwindcss/vite';
 
 export default defineConfig({
-  site: 'https://futureware.ch',
+  site: 'https://futureware.dev',
   output: 'static',
   trailingSlash: 'ignore',
   integrations: [
