@@ -276,7 +276,7 @@ const t = getTranslations(lang);
       const message = String(data.get('message') || '').trim();
 
       const formspreeUrl = (form.dataset.formspreeEndpoint || '').trim();
-      const web3Key = (form.dataset.web3FormsKey || '').trim();
+      const web3Key = (form.dataset.web3formsKey || '').trim();
       const web3Url = (form.dataset.web3formsEndpoint || 'https://api.web3forms.com/submit').trim();
 
       if (!formspreeUrl && !web3Key) {
